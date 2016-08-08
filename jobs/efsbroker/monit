@@ -1,0 +1,5 @@
+check process efsbroker
+  with pidfile /var/vcap/sys/run/efsbroker/efsbroker.pid
+  start program "/var/vcap/jobs/efsbroker/bin/efsbroker_ctl start"
+  stop program "/var/vcap/jobs/efsbroker/bin/efsbroker_ctl stop"
+  group vcap

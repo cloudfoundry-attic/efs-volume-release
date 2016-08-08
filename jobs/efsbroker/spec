@@ -1,0 +1,39 @@
+---
+name: efsbroker
+
+templates:
+  ctl.erb: bin/efsbroker_ctl
+
+packages:
+- golang-efsvolume
+- efsvolume_pid_utils
+- efsbroker
+
+properties:
+  efsbroker.listen-addr:
+    description: "address efsbroker listens on"
+    default: "0.0.0.0:8999"
+  efsbroker.service-name:
+    description: "name of the service to be registered with cf"
+    default: "efs"
+  efsbroker.service-id:
+    description: "Id of the service to be registered with cf"
+    default: "efs-service-guid"
+  efsbroker.plan-name:
+    description: "Name of the service plan to be registered with cf"
+    default: "free"
+  efsbroker.plan-id:
+    description: "Id of the service plan to be registered with cf"
+    default: "free-plan-guid"
+  efsbroker.plan-desc:
+    description: "Description of the service plan to be registered with cf"
+    default: "free local filesystem"
+  efsbroker.data-dir:
+    description: "Directory on broker VM to persist instance and binding state"
+    default: "/var/vcap/store/efsbroker"
+  efsbroker.username:
+    description: "Basic auth username to verify on incoming Service Broker requests"
+    default: "admin"
+  efsbroker.password:
+    description: "Basic auth password to verify on incoming Service Broker requests"
+    default: "admin"

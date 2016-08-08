@@ -2,6 +2,8 @@
 
 set -e
 
+cd $(dirname $0)/..
+
 # ensure gosub is installed (this will recompile it only if necessary)
 go get github.com/vito/gosub
 go install github.com/vito/gosub
@@ -35,8 +37,7 @@ function sync_package() {
   )
 }
 
-sync_package localdriver       -app code.cloudfoundry.org/localdriver/cmd/localdriver
-sync_package localbroker       -app code.cloudfoundry.org/localbroker/cmd/localbroker
+sync_package efsbroker       -app code.cloudfoundry.org/efsbroker/cmd/efsbroker
 
 wait
 

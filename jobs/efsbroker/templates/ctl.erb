@@ -1,0 +1,57 @@
+#!/bin/bash
+
+set -e -x
+
+RUN_DIR=/var/vcap/sys/run/efsbroker
+LOG_DIR=/var/vcap/sys/log/efsbroker
+PIDFILE=$RUN_DIR/efsbroker.pid
+
+source /var/vcap/packages/efsvolume_pid_utils/pid_utils.sh
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE "efsbroker"
+
+    mkdir -p $RUN_DIR
+    chown -R vcap:vcap $RUN_DIR
+
+    mkdir -p $LOG_DIR
+    chown -R vcap:vcap $LOG_DIR
+
+    mkdir -p "<%= p("efsbroker.data-dir") %>"
+    chown -R vcap:vcap "<%= p("efsbroker.data-dir") %>"
+
+    export GOMAXPROCS=$(nproc)
+
+    # Work around for go DNS bug (fix slated for v1.7)
+    export GODEBUG=netdns=cgo
+
+    echo $$ > $PIDFILE
+
+    exec chpst -u vcap:vcap /var/vcap/packages/efsbroker/bin/efsbroker \
+      --listenAddr="<%= p("efsbroker.listen-addr") %>" \
+      --serviceName="<%= p("efsbroker.service-name") %>" \
+      --serviceId="<%= p("efsbroker.service-id") %>" \
+      --planName="<%= p("efsbroker.plan-name") %>" \
+      --planId="<%= p("efsbroker.plan-id") %>" \
+      --planDesc="<%= p("efsbroker.plan-desc") %>" \
+      --dataDir="<%= p("efsbroker.data-dir") %>" \
+      --username="<%= p("efsbroker.username") %>" \
+      --password="<%= p("efsbroker.password") %>" \
+      2> >(tee -a $LOG_DIR/efsbroker.stderr.log | logger -p user.error -t vcap.efsbroker) \
+      1> >(tee -a $LOG_DIR/efsbroker.stdout.log | logger -p user.info -t vcap.efsbroker)
+
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: efsbroker_ctl {start|stop}"
+
+    ;;
+
+esac

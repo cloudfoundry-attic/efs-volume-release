@@ -1,0 +1,24 @@
+---
+name: efsbroker
+
+dependencies:
+- golang-efsvolume
+
+files:
+  - code.cloudfoundry.org/cflager/*.go # gosub
+  - code.cloudfoundry.org/debugserver/*.go # gosub
+  - code.cloudfoundry.org/efsbroker/cmd/efsbroker/*.go # gosub
+  - code.cloudfoundry.org/efsbroker/efsbroker/*.go # gosub
+  - code.cloudfoundry.org/efsbroker/utils/*.go # gosub
+  - code.cloudfoundry.org/lager/*.go # gosub
+  - code.cloudfoundry.org/voldriver/*.go # gosub
+  - github.com/bmizerany/pat/*.go # gosub
+  - github.com/gorilla/context/*.go # gosub
+  - github.com/gorilla/mux/*.go # gosub
+  - github.com/pivotal-cf/brokerapi/*.go # gosub
+  - github.com/pivotal-cf/brokerapi/auth/*.go # gosub
+  - github.com/tedsuo/ifrit/*.go # gosub
+  - github.com/tedsuo/ifrit/grouper/*.go # gosub
+  - github.com/tedsuo/ifrit/http_server/*.go # gosub
+  - github.com/tedsuo/ifrit/sigmon/*.go # gosub
+  - github.com/tedsuo/rata/*.go # gosub
