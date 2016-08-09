@@ -2,4 +2,4 @@
 name: golang-efsvolume
 
 files:
-  - golang/go1.6.2.linux-amd64.tar.gz
+  - go1.6.2.linux-amd64.tar.gz
