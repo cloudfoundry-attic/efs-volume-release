@@ -17,7 +17,7 @@ bosh -n -d ~/workspace/cf-release/bosh-lite/deployments/cf.yml deploy
 bosh -n -d ~/workspace/diego-release/bosh-lite/deployments/diego.yml deploy
 
 pushd ~/workspace/efs-volume-release
-    ./scripts/generate-bosh-lite-manifest.sh $(bosh status --uuid) https://192.168.50.4:25555 admin admin admin admin
+    ./scripts/generate-bosh-lite-manifest.sh
     bosh create release --force && bosh upload release
 popd
 

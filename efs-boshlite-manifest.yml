@@ -6,35 +6,6 @@ director_uuid: 17a45148-1d00-43bc-af28-9882e5a6535a
 jobs:
 - instances: 1
   log_level: debug
-  name: pats-broker
-  networks:
-  - name: efs-net
-  properties:
-    efsbroker:
-      data-dir: /var/vcap/store/pats-efsbroker
-      password: admin
-      plan-id: pats-plan-id
-      plan-name: efs-plan
-      service-id: pats-efs-volume
-      service-name: efs-service
-      username: admin
-    route_registrar:
-      routes:
-      - name: pats-broker
-        port: 8999
-        registration_interval: 20s
-        tags:
-          component: pats-broker
-        uris:
-        - pats-broker.bosh-lite.com
-  resource_pool: efs-resourcepool
-  templates:
-  - name: efsbroker
-    release: efs-volume
-  - name: route_registrar
-    release: cf
-- instances: 1
-  log_level: debug
   name: efsbroker
   networks:
   - name: efs-net
@@ -71,7 +42,12 @@ networks:
   type: manual
 properties:
   efsbroker:
+    aws-access-key-id: AKIAJTDFD6NODMM75OOQ
+    aws-region: null
+    aws-secret-access-key: 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
+    password: admin
     plan-desc: free efs volume for bosh-lite
+    username: admin
   nats:
     machines:
     - 10.244.0.6

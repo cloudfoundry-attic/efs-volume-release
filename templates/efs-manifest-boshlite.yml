@@ -8,35 +8,6 @@ compilation:
 jobs:
 - instances: 1
   log_level: debug
-  name: pats-broker
-  networks:
-  - name: efs-net
-  resource_pool: efs-resourcepool
-  templates:
-  - name: efsbroker
-    release: efs-volume
-  - name: route_registrar
-    release: cf
-  properties:
-    efsbroker:
-      service-id: pats-efs-volume
-      service-name: efs-service
-      plan-name: efs-plan
-      plan-id: pats-plan-id
-      data-dir: /var/vcap/store/pats-efsbroker
-      username: (( merge ))
-      password: (( merge ))
-    route_registrar:
-      routes:
-      - name: pats-broker
-        port: 8999
-        registration_interval: 20s
-        tags:
-          component: pats-broker
-        uris:
-        - pats-broker.bosh-lite.com
-- instances: 1
-  log_level: debug
   name: efsbroker
   networks:
   - name: efs-net
@@ -73,6 +44,11 @@ networks:
 properties:
   efsbroker:
     plan-desc: free efs volume for bosh-lite
+    username: (( merge ))
+    password: (( merge ))
+    aws-region: (( merge || nil ))
+    aws-secret-access-key: (( merge ))
+    aws-access-key-id: (( merge ))
   nats:
     machines:
     - 10.244.0.6

@@ -29,6 +29,10 @@ case $1 in
 
     echo $$ > $PIDFILE
 
+    export AWS_REGION='<%= p("efsbroker.aws-region") %>'
+    export AWS_ACCESS_KEY_ID='<%= p("efsbroker.aws-access-key-id") %>'
+    export AWS_SECRET_ACCESS_KEY='<%= p("efsbroker.aws-secret-access-key") %>'
+
     exec chpst -u vcap:vcap /var/vcap/packages/efsbroker/bin/efsbroker \
       --listenAddr="<%= p("efsbroker.listen-addr") %>" \
       --serviceName="<%= p("efsbroker.service-name") %>" \

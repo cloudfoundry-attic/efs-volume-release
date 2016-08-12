@@ -37,3 +37,10 @@ properties:
   efsbroker.password:
     description: "Basic auth password to verify on incoming Service Broker requests"
     default: "admin"
+  efsbroker.aws-region:
+    description: "AWS Region where the broker will create EFS instances"
+    default: "us-east-1"
+  efsbroker.aws-access-key-id:
+    description: "AWS Access Key Id for the account managing EFS instances"
+  efsbroker.aws-secret-access-key:
+    description: "AWS Secret Access Key for the account managing EFS instances"
