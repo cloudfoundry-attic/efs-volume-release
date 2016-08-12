@@ -69,4 +69,4 @@ tags
 src/code.cloudfoundry.org/results/
 
 # locally generated manifest file
-localvolume-boshlite-manifest.yml
+*-boshlite-manifest.yml
