@@ -58,3 +58,7 @@
 	path = src/code.cloudfoundry.org/persi-acceptance-tests
 	url = https://github.com/cloudfoundry-incubator/persi-acceptance-tests
 	branch = master
+[submodule "src/code.cloudfoundry.org/goshims"]
+	path = src/code.cloudfoundry.org/goshims
+	url = https://github.com/cloudfoundry-incubator/goshims
+	branch = master
