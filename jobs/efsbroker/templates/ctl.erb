@@ -43,6 +43,7 @@ case $1 in
       --dataDir="<%= p("efsbroker.data-dir") %>" \
       --username="<%= p("efsbroker.username") %>" \
       --password="<%= p("efsbroker.password") %>" \
+      --awsSubnetIds="<%= p("efsbroker.aws-subnet-ids") %>" \
       2> >(tee -a $LOG_DIR/efsbroker.stderr.log | logger -p user.error -t vcap.efsbroker) \
       1> >(tee -a $LOG_DIR/efsbroker.stdout.log | logger -p user.info -t vcap.efsbroker)
 

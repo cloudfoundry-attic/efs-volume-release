@@ -9,7 +9,6 @@ files:
   - code.cloudfoundry.org/debugserver/*.go # gosub
   - code.cloudfoundry.org/efsbroker/cmd/efsbroker/*.go # gosub
   - code.cloudfoundry.org/efsbroker/efsbroker/*.go # gosub
-  - code.cloudfoundry.org/efsbroker/efsdriver/*.go # gosub
   - code.cloudfoundry.org/efsbroker/utils/*.go # gosub
   - code.cloudfoundry.org/goshims/ioutil/*.go # gosub
   - code.cloudfoundry.org/goshims/os/*.go # gosub

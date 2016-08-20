@@ -49,6 +49,7 @@ properties:
     aws-region: (( merge || nil ))
     aws-secret-access-key: (( merge ))
     aws-access-key-id: (( merge ))
+    aws-subnet-ids: (( merge ))
   nats:
     machines:
     - 10.244.0.6

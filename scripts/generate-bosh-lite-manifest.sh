@@ -33,6 +33,7 @@ properties:
     password: admin
     aws-access-key-id: $AWS_ACCESS_KEY_ID
     aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
+    aws-subnet-ids: subnet-6e5d3444
 EOF
 
 
