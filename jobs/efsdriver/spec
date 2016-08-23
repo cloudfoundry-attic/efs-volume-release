@@ -1,0 +1,25 @@
+---
+name: localdriver
+
+templates:
+  install.erb: bin/pre-start
+  ctl.erb: bin/localdriver_ctl
+
+packages:
+- golang-localvolume
+- localvolume_pid_utils
+- localdriver
+
+properties:
+  localdriver.listen_addr:
+    description: "address localdriver listens on"
+    default: "0.0.0.0:9089"
+  localdriver.debug_addr:
+    description: "address localdriver will serve debug info"
+    default: "0.0.0.0:9189"
+  localdriver.driver_path:
+    description: "path to place driver spec/json file for volman to discover"
+    default: "/var/vcap/data/voldrivers"
+  localdriver.log_level:
+    description: "localdriver log level"
+    default: "info"

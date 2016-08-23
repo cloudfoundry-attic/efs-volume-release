@@ -57,8 +57,40 @@
 [submodule "src/code.cloudfoundry.org/persi-acceptance-tests"]
 	path = src/code.cloudfoundry.org/persi-acceptance-tests
 	url = https://github.com/cloudfoundry-incubator/persi-acceptance-tests
-	branch = master
+	branch = wip-127921959
 [submodule "src/code.cloudfoundry.org/goshims"]
 	path = src/code.cloudfoundry.org/goshims
 	url = https://github.com/cloudfoundry-incubator/goshims
+	branch = master
+[submodule "src/code.cloudfoundry.org/voldriver"]
+	path = src/code.cloudfoundry.org/voldriver
+	url = https://github.com/cloudfoundry-incubator/voldriver
+	branch = master
+[submodule "src/code.cloudfoundry.org/cfhttp"]
+	path = src/code.cloudfoundry.org/cfhttp
+	url = https://github.com/cloudfoundry/cfhttp
+	branch = master
+[submodule "src/code.cloudfoundry.org/efsdriver"]
+	path = src/code.cloudfoundry.org/efsdriver
+	url = https://cloudfoundry-incubator/efsdriver
+	branch = master
+[submodule "src/github.com/cloudfoundry/gunk"]
+	path = src/github.com/cloudfoundry/gunk
+	url = https://github.com/cloudfoundry/gunk
+	branch = master
+[submodule "src/github.com/tedsuo/rata"]
+	path = src/github.com/tedsuo/rata
+	url = https://github.com/tedsuo/rata
+	branch = master
+[submodule "src/code.cloudfoundry.org/clock"]
+	path = src/code.cloudfoundry.org/clock
+	url = https://github.com/cloudfoundry/clock
+	branch = master
+[submodule "src/golang.org/x/crypto"]
+	path = src/golang.org/x/crypto
+	url = https://go.googlesource.com/crypto
+	branch = master
+[submodule "src/github.com/bmizerany/pat"]
+	path = src/github.com/bmizerany/pat
+	url = https://github.com/bmizerany/pat
 	branch = master

@@ -38,6 +38,7 @@ function sync_package() {
 }
 
 sync_package efsbroker       -app code.cloudfoundry.org/efsbroker/cmd/efsbroker
+sync_package efsdriver       -app code.cloudfoundry.org/efsdriver/cmd/efsdriver
 
 wait
 

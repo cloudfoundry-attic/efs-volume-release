@@ -1,0 +1,55 @@
+#!/bin/bash
+
+set -e -x
+
+RUN_DIR=/var/vcap/sys/run/efsdriver
+LOG_DIR=/var/vcap/sys/log/efsdriver
+PIDFILE=$RUN_DIR/efsdriver.pid
+
+source /var/vcap/packages/efsvolume_pid_utils/pid_utils.sh
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE "efsdriver"
+
+    mkdir -p $RUN_DIR
+    chown -R vcap:vcap $RUN_DIR
+
+    mkdir -p $LOG_DIR
+    chown -R vcap:vcap $LOG_DIR
+
+    export GOMAXPROCS=$(nproc)
+
+    # Work around for GOLANG 1.5.3 DNS bug
+    export GODEBUG=netdns=cgo
+
+    echo $$ > $PIDFILE
+
+    # Allowed number of open file descriptors
+    ulimit -n 100000
+
+    # volume drivers need to create directories with 777 so container users can see them
+    umask 0
+    exec chpst -u vcap:vcap /var/vcap/packages/efsdriver/bin/efsdriver \
+      --listenAddr="<%= p("efsdriver.listen_addr") %>" \
+      --transport="tcp" \
+      --debugAddr="<%= p("efsdriver.debug_addr") %>" \
+      --driversPath="<%= p("efsdriver.driver_path") %>" \
+      --logLevel="<%= p("efsdriver.log_level") %>" \
+      2> >(tee -a $LOG_DIR/efsdriver.stderr.log | logger -p user.error -t vcap.efsdriver) \
+      1> >(tee -a $LOG_DIR/efsdriver.stdout.log | logger -p user.info -t vcap.efsdriver)
+
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: efsdriver_ctl {start|stop}"
+
+    ;;
+
+esac
