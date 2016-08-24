@@ -72,7 +72,7 @@
 	branch = master
 [submodule "src/code.cloudfoundry.org/efsdriver"]
 	path = src/code.cloudfoundry.org/efsdriver
-	url = https://cloudfoundry-incubator/efsdriver
+	url = https://github.com/cloudfoundry-incubator/efsdriver
 	branch = master
 [submodule "src/github.com/cloudfoundry/gunk"]
 	path = src/github.com/cloudfoundry/gunk
