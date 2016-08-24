@@ -1,5 +1,5 @@
-check process localdriver
-  with pidfile /var/vcap/sys/run/localdriver/localdriver.pid
-  start program "/var/vcap/jobs/localdriver/bin/localdriver_ctl start"
-  stop program "/var/vcap/jobs/localdriver/bin/localdriver_ctl stop"
+check process efsdriver
+  with pidfile /var/vcap/sys/run/efsdriver/efsdriver.pid
+  start program "/var/vcap/jobs/efsdriver/bin/efsdriver_ctl start"
+  stop program "/var/vcap/jobs/efsdriver/bin/efsdriver_ctl stop"
   group vcap

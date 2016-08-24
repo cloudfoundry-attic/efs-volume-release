@@ -3,7 +3,7 @@ name: local-volume
 director_uuid:  (( merge ))
 compilation:
   workers: 1
-  network: localvolume-subnet
+  network: efsvolume-subnet
   reuse_compilation_vms: true
   cloud_properties:
     availability_zone: us-east-1c
@@ -12,75 +12,75 @@ compilation:
       size: 10000 # in MB
       type: gp2
 jobs:
-- name: localbroker-pats
+- name: efsbroker-pats
   instances: 1
   log_level: debug
   networks:
-  - name: localvolume-subnet
+  - name: efsvolume-subnet
     default: [dns, gateway]
   - name: public
     static_ips: [52.205.244.140]
   resource_pool: medium
   templates:
-  - release: local-volume
-    name: localbroker
+  - release: efs-volume
+    name: efsbroker
   - release: cf
     name: route_registrar
   persistent_disk: 25000
   properties:
-    localbroker:
-      service-id: localvolume-ginkgoPATS-pats-local-volume
-      service-name: localvolume-ginkgoPATS-pats-service
-      plan-name: localvolume-ginkgoPATS-pats-plan
-      plan-id: localvolume-ginkgoPATS-pats-plan-id
-      data-dir: /var/vcap/store/pats-localbroker
+    efsbroker:
+      service-id: efsvolume-ginkgoPATS-pats-efs-volume
+      service-name: efsvolume-ginkgoPATS-pats-service
+      plan-name: efsvolume-ginkgoPATS-pats-plan
+      plan-id: efsvolume-ginkgoPATS-pats-plan-id
+      data-dir: /var/vcap/store/pats-efsbroker
       username: (( merge ))
       password: (( merge ))
     route_registrar:
       routes:
-      - name: pats-local-broker
+      - name: pats-efs-broker
         port: 8999
         registration_interval: 20s
         tags:
-          component: pats-local-broker
+          component: pats-efs-broker
         uris:
-        - pats-broker.localvolume-ginkgoPATS.persi.cf-app.com
+        - pats-broker.efsvolume-ginkgoPATS.persi.cf-app.com
 
 
-- name: localbroker-acc
+- name: efsbroker-acc
   instances: 1
   log_level: debug
   networks:
-  - name: localvolume-subnet
+  - name: efsvolume-subnet
     default: [dns, gateway]
   - name: public
     static_ips: [52.205.231.171]
   resource_pool: medium
   templates:
-  - release: local-volume
-    name: localbroker
+  - release: efs-volume
+    name: efsbroker
   - release: cf
     name: route_registrar
   persistent_disk: 25000
   properties:
-    localbroker:
-      service-id: local-volume
-      service-name: local-volume
-      plan-name: free-local-dist
+    efsbroker:
+      service-id: efs-volume
+      service-name: efs-volume
+      plan-name: free-efs-dist
       plan-id: free
-      data-dir: /var/vcap/store/pats-localbroker
+      data-dir: /var/vcap/store/pats-efsbroker
     route_registrar:
       routes:
-      - name: local-broker
+      - name: efs-broker
         port: 8999
         registration_interval: 20s
         tags:
-          component: local-broker
+          component: efs-broker
         uris:
-        - local-broker.persi.cf-app.com
+        - efs-broker.persi.cf-app.com
 
 networks:
-- name: localvolume-subnet
+- name: efsvolume-subnet
   subnets:
   - cloud_properties:
       security_groups:
@@ -99,18 +99,18 @@ networks:
 - name: public
   type: vip
 properties:
-  localbroker:
-    plan-desc: free local filesystem for bosh-lite
-    localdriver-url: (( merge ))
+  efsbroker:
+    plan-desc: efs filesystem for aws
+    efsdriver-url: (( merge ))
   nats: (( merge ))
 releases:
-  - name: local-volume
+  - name: efs-volume
     version: latest
   - name: cf
     version: latest
 resource_pools:
   - name: large
-    network: localvolume-subnet
+    network: efsvolume-subnet
     stemcell:
       name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
       version: latest
@@ -119,7 +119,7 @@ resource_pools:
       availability_zone: us-east-1c
 
   - name: medium
-    network: localvolume-subnet
+    network: efsvolume-subnet
     stemcell:
       name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
       version: latest

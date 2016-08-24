@@ -43,7 +43,7 @@ networks:
   type: manual
 properties:
   efsbroker:
-    plan-desc: free efs volume for bosh-lite
+    plan-desc: efs volume for bosh-lite
     username: (( merge ))
     password: (( merge ))
     aws-region: (( merge || nil ))

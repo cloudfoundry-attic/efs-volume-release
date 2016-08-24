@@ -1,25 +1,25 @@
 ---
-name: localdriver
+name: efsdriver
 
 templates:
   install.erb: bin/pre-start
-  ctl.erb: bin/localdriver_ctl
+  ctl.erb: bin/efsdriver_ctl
 
 packages:
-- golang-localvolume
-- localvolume_pid_utils
-- localdriver
+- golang-efsvolume
+- efsvolume_pid_utils
+- efsdriver
 
 properties:
-  localdriver.listen_addr:
-    description: "address localdriver listens on"
+  efsdriver.listen_addr:
+    description: "address efsdriver listens on"
     default: "0.0.0.0:9089"
-  localdriver.debug_addr:
-    description: "address localdriver will serve debug info"
+  efsdriver.debug_addr:
+    description: "address efsdriver will serve debug info"
     default: "0.0.0.0:9189"
-  localdriver.driver_path:
+  efsdriver.driver_path:
     description: "path to place driver spec/json file for volman to discover"
     default: "/var/vcap/data/voldrivers"
-  localdriver.log_level:
-    description: "localdriver log level"
+  efsdriver.log_level:
+    description: "efsdriver log level"
     default: "info"

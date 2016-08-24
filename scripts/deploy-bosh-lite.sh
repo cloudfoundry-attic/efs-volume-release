@@ -8,8 +8,14 @@ pushd ~/workspace/cf-release
 popd
 
 pushd ~/workspace/diego-release
-#    USE_VOLDRIVER=true ./scripts/generate-bosh-lite-manifests
-    ./scripts/generate-bosh-lite-manifests
+    #modify the default drivers.yml stub for diego so that it picks up our driver instead of localdriver
+    cp -f manifest-generation/bosh-lite-stubs/experimental/voldriver/drivers.yml ./drivers.yml.backup
+    sed -i -e 's/local/efs/g' manifest-generation/bosh-lite-stubs/experimental/voldriver/drivers.yml
+
+    USE_VOLDRIVER=true ./scripts/generate-bosh-lite-manifests
+
+    cp -f ./drivers.yml.backup manifest-generation/bosh-lite-stubs/experimental/voldriver/drivers.yml
+    rm -f ./drivers.yml.backup
 popd
 
 bosh -n -d ~/workspace/cf-release/bosh-lite/deployments/cf.yml deploy
