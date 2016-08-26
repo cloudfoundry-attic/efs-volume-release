@@ -5,6 +5,7 @@ dependencies:
 - golang-efsvolume
 
 files:
+  - golang.org/x/sys/unix/*.*
   - code.cloudfoundry.org/cfhttp/*.go # gosub
   - code.cloudfoundry.org/cfhttp/handlers/*.go # gosub
   - code.cloudfoundry.org/cfhttp/unix_transport/*.go # gosub
@@ -25,5 +26,3 @@ files:
   - github.com/tedsuo/ifrit/http_server/*.go # gosub
   - github.com/tedsuo/ifrit/sigmon/*.go # gosub
   - github.com/tedsuo/rata/*.go # gosub
-  - golang.org/x/crypto/bcrypt/*.go # gosub
-  - golang.org/x/crypto/blowfish/*.go # gosub
