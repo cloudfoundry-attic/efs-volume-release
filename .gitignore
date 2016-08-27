@@ -70,3 +70,4 @@ src/code.cloudfoundry.org/results/
 
 # locally generated manifest file
 *-boshlite-manifest.yml
+*creds.yml

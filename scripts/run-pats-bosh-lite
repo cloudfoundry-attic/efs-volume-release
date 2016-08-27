@@ -17,4 +17,4 @@ EOF
 
 CONFIG=/tmp/bosh-lite-efs-pats.json \
 TEST_APPLICATION_PATH=~/workspace/local-volume-release/assets/pora/ \
-ginkgo -p src/code.cloudfoundry.org/persi-acceptance-tests/
+ginkgo -p -v src/code.cloudfoundry.org/persi-acceptance-tests/

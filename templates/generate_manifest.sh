@@ -29,16 +29,14 @@ fi
 
 if [ "$1" == "aws" ]
   then
-  echo "AWS NOT SUPPORTED YET!"
-#    MANIFEST_NAME=localvolume-aws-manifest
-#
-#    spiff merge ${templates}/localvolume-manifest-aws.yml \
-#    $2 \
-#    $3 \
-#    $7 \
-#    ${PWD}/cell-ip.yml \
-#    ${templates}/stubs/toplevel-manifest-overrides.yml \
-#    > $PWD/$MANIFEST_NAME.yml
+    MANIFEST_NAME=efsvolume-aws-manifest
+
+    spiff merge ${templates}/efsvolume-manifest-aws.yml \
+    $2 \
+    $3 \
+    $7 \
+    ${templates}/toplevel-manifest-overrides.yml \
+    > $PWD/$MANIFEST_NAME.yml
 fi
 
 echo manifest written to $PWD/$MANIFEST_NAME.yml

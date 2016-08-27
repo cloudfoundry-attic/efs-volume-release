@@ -1,5 +1,5 @@
 ---
-name: local-volume
+name: efs-volume
 director_uuid:  (( merge ))
 compilation:
   workers: 1
@@ -12,42 +12,7 @@ compilation:
       size: 10000 # in MB
       type: gp2
 jobs:
-- name: efsbroker-pats
-  instances: 1
-  log_level: debug
-  networks:
-  - name: efsvolume-subnet
-    default: [dns, gateway]
-  - name: public
-    static_ips: [52.205.244.140]
-  resource_pool: medium
-  templates:
-  - release: efs-volume
-    name: efsbroker
-  - release: cf
-    name: route_registrar
-  persistent_disk: 25000
-  properties:
-    efsbroker:
-      service-id: efsvolume-ginkgoPATS-pats-efs-volume
-      service-name: efsvolume-ginkgoPATS-pats-service
-      plan-name: efsvolume-ginkgoPATS-pats-plan
-      plan-id: efsvolume-ginkgoPATS-pats-plan-id
-      data-dir: /var/vcap/store/pats-efsbroker
-      username: (( merge ))
-      password: (( merge ))
-    route_registrar:
-      routes:
-      - name: pats-efs-broker
-        port: 8999
-        registration_interval: 20s
-        tags:
-          component: pats-efs-broker
-        uris:
-        - pats-broker.efsvolume-ginkgoPATS.persi.cf-app.com
-
-
-- name: efsbroker-acc
+- name: efsbroker
   instances: 1
   log_level: debug
   networks:
@@ -64,11 +29,13 @@ jobs:
   persistent_disk: 25000
   properties:
     efsbroker:
-      service-id: efs-volume
-      service-name: efs-volume
-      plan-name: free-efs-dist
-      plan-id: free
-      data-dir: /var/vcap/store/pats-efsbroker
+      plan-desc: efs volume for bosh-lite
+      username: (( merge ))
+      password: (( merge ))
+      aws-region: (( merge || nil ))
+      aws-secret-access-key: (( merge ))
+      aws-access-key-id: (( merge ))
+      aws-subnet-ids: (( merge ))
     route_registrar:
       routes:
       - name: efs-broker

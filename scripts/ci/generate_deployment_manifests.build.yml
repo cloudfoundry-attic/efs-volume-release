@@ -1,0 +1,25 @@
+---
+platform: linux
+
+image: docker:///cloudfoundry/diego-pipeline
+
+inputs:
+  - name: deployments-diego
+  - name: efs-volume-release
+  - name: cf-release
+
+outputs:
+  - name: generated-manifest-localvolume
+
+params:
+  DEPLOYMENTS_DIR: replace-me
+  ENVIRONMENT_NAME: replace-me
+  BOSH_PASSWORD: replace-me
+  BOSH_TARGET: replace-me
+  BOSH_USERNAME: replace-me
+  AWS_ACCESS_KEY_ID: replace-me
+  AWS_SECRET_ACCESS_KEY: replace-me
+  AWS_SUBNET_ID: replace-me
+
+run:
+  path: efs-volume-release/scripts/ci/generate_deployment_manifests
