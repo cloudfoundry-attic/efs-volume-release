@@ -1,5 +1,5 @@
 ---
-name: efsbroker
+name: efs-volume
 
 compilation:
   workers: 1

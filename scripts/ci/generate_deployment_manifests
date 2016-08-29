@@ -11,6 +11,7 @@ check_param DEPLOYMENTS_DIR
 check_param AWS_ACCESS_KEY_ID
 check_param AWS_SECRET_ACCESS_KEY
 check_param AWS_SUBNET_ID
+check_param INFRASTRUCTURE
 
 if [ -z "$ENVIRONMENT_NAME" ]; then
   environment_path="${PWD}/${DEPLOYMENTS_DIR}"
