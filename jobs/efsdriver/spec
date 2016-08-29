@@ -13,10 +13,10 @@ packages:
 properties:
   efsdriver.listen_addr:
     description: "address efsdriver listens on"
-    default: "0.0.0.0:9089"
+    default: "127.0.0.1:7089"
   efsdriver.debug_addr:
     description: "address efsdriver will serve debug info"
-    default: "0.0.0.0:9189"
+    default: "127.0.0.1:7189"
   efsdriver.driver_path:
     description: "path to place driver spec/json file for volman to discover"
     default: "/var/vcap/data/voldrivers"
