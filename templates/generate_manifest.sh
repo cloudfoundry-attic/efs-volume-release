@@ -1,7 +1,7 @@
 #!/bin/bash
 #generate_manifest.sh
 
-
+set -e -x
 
 usage () {
     echo "Usage: generate_manifest.sh bosh-lite|aws cf-manifest director-stub bosh-target bosh-username bosh-password efs-props-stub"

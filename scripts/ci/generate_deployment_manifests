@@ -35,6 +35,7 @@ cat > ${PWD}/efsbroker-creds.yml << EOF
 ---
 properties:
   efsbroker:
+    efsdriver-url: http://notsurewot.com
     username: ${BOSH_USERNAME}
     password: ${BOSH_PASSWORD}
     aws-access-key-id: ${AWS_ACCESS_KEY_ID}
@@ -48,7 +49,7 @@ EOF
     ${BOSH_TARGET} \
     ${BOSH_USERNAME} \
     ${BOSH_PASSWORD} \
-    ${stubs_path}/efsbroker/creds.yml
+    ${PWD}/efsbroker-creds.yml
 
   mv efsvolume-aws-manifest.yml ../generated-manifest-efs/efsvolume-manifest.yml
 popd

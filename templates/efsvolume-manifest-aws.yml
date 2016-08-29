@@ -28,14 +28,7 @@ jobs:
     name: route_registrar
   persistent_disk: 25000
   properties:
-    efsbroker:
-      plan-desc: efs volume for bosh-lite
-      username: (( merge ))
-      password: (( merge ))
-      aws-region: (( merge || nil ))
-      aws-secret-access-key: (( merge ))
-      aws-access-key-id: (( merge ))
-      aws-subnet-ids: (( merge ))
+    efsbroker: {}
     route_registrar:
       routes:
       - name: efs-broker
@@ -69,6 +62,12 @@ properties:
   efsbroker:
     plan-desc: efs filesystem for aws
     efsdriver-url: (( merge ))
+    username: (( merge ))
+    password: (( merge ))
+    aws-region: (( merge || nil ))
+    aws-secret-access-key: (( merge ))
+    aws-access-key-id: (( merge ))
+    aws-subnet-ids: (( merge ))
   nats: (( merge ))
 releases:
   - name: efs-volume
