@@ -61,13 +61,13 @@ networks:
 properties:
   efsbroker:
     plan-desc: efs filesystem for aws
-    efsdriver-url: (( merge ))
     username: (( merge ))
     password: (( merge ))
     aws-region: (( merge || nil ))
     aws-secret-access-key: (( merge ))
     aws-access-key-id: (( merge ))
     aws-subnet-ids: (( merge ))
+    aws-security-group: (( merge ))
   nats: (( merge ))
 releases:
   - name: efs-volume

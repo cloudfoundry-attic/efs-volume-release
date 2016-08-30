@@ -46,3 +46,5 @@ properties:
     description: "AWS Secret Access Key for the account managing EFS instances"
   efsbroker.aws-subnet-ids:
     description: "Comma-seperated AWS subnet Ids where mount targets should be created"
+  efsbroker.aws-security-group:
+    description: "AWS security group id to assign to the mount point"

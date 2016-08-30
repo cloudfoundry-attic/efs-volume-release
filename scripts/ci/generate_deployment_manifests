@@ -11,6 +11,7 @@ check_param DEPLOYMENTS_DIR
 check_param AWS_ACCESS_KEY_ID
 check_param AWS_SECRET_ACCESS_KEY
 check_param AWS_SUBNET_ID
+check_param AWS_SECURITY_GROUP
 check_param INFRASTRUCTURE
 
 if [ -z "$ENVIRONMENT_NAME" ]; then
@@ -36,12 +37,12 @@ cat > ${PWD}/efsbroker-creds.yml << EOF
 ---
 properties:
   efsbroker:
-    efsdriver-url: http://notsurewot.com
     username: ${BOSH_USERNAME}
     password: ${BOSH_PASSWORD}
     aws-access-key-id: ${AWS_ACCESS_KEY_ID}
     aws-secret-access-key: ${AWS_SECRET_ACCESS_KEY}
     aws-subnet-ids: ${AWS_SUBNET_ID}
+    aws-security-group: ${AWS_SECURITY_GROUP}
 EOF
 
   ./templates/generate_manifest.sh aws \
