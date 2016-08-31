@@ -13,4 +13,7 @@ export PATH=$PWD/bin:$PATH
 
 go get github.com/onsi/ginkgo/ginkgo
 
+# TODO this should go in the dockerfile
+apt-get -q -y install nfs-common
+
 ./scripts/run-certification-tests
