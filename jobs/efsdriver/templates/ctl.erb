@@ -36,7 +36,7 @@ case $1 in
     setcap cap_sys_admin=ep /var/vcap/packages/efsdriver/bin/efsdriver
     setcap -v cap_sys_admin=ep /var/vcap/packages/efsdriver/bin/efsdriver
 
-    exec chpst -u vcap:vcap /var/vcap/packages/efsdriver/bin/efsdriver \
+    exec chpst /var/vcap/packages/efsdriver/bin/efsdriver \
       --listenAddr="<%= p("efsdriver.listen_addr") %>" \
       --transport="tcp" \
       --debugAddr="<%= p("efsdriver.debug_addr") %>" \
