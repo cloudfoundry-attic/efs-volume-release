@@ -86,14 +86,7 @@
 	path = src/code.cloudfoundry.org/clock
 	url = https://github.com/cloudfoundry/clock
 	branch = master
-[submodule "src/golang.org/x/crypto"]
-	path = src/golang.org/x/crypto
-	url = https://go.googlesource.com/crypto
-	branch = master
 [submodule "src/github.com/bmizerany/pat"]
 	path = src/github.com/bmizerany/pat
 	url = https://github.com/bmizerany/pat
 	branch = master
-[submodule "src/golang.org/x/sys"]
-	path = src/golang.org/x/sys
-	url = https://go.googlesource.com/sys

@@ -9,7 +9,7 @@ inputs:
   - name: cf-release
 
 outputs:
-  - name: generated-manifest-localvolume
+  - name: generated-manifest-efs
 
 params:
   DEPLOYMENTS_DIR: replace-me
