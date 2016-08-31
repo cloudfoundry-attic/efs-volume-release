@@ -1,0 +1,19 @@
+---
+platform: linux
+
+image: docker:///cloudfoundry/diego-pipeline
+
+inputs:
+  - name: efs-volume-release
+  - name: efs-volume-version
+
+outputs:
+  - name: created-efs-volume-release
+
+params:
+  BOSH_TARGET: replace-me
+  BOSH_USERNAME: replace-me
+  BOSH_PASSWORD: replace-me
+
+run:
+  path: efs-volume-release/scripts/ci/create_efs_volume_release
