@@ -3,5 +3,5 @@
 set -e -x
 
 pushd src/code.cloudfoundry.org/efsbroker
-  ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress --race "$@"
+  ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress "$@"
 popd
