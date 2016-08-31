@@ -24,6 +24,8 @@ stubs_path="${environment_path}/stubs"
 templates_path="${environment_path}/templates"
 efsvolume_stubs="${PWD}/${DEPLOYMENTS_DIR}/efs-volume/stubs"
 
+mkdir -p generated-manifest-efs
+
 pushd cf-release
   ./scripts/generate_deployment_manifest \
     ${INFRASTRUCTURE} \
