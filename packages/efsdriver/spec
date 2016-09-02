@@ -13,6 +13,8 @@ files:
   - code.cloudfoundry.org/debugserver/*.go # gosub
   - code.cloudfoundry.org/efsdriver/*.go # gosub
   - code.cloudfoundry.org/efsdriver/cmd/efsdriver/*.go # gosub
+  - code.cloudfoundry.org/efsdriver/efsvoltools/*.go # gosub
+  - code.cloudfoundry.org/efsdriver/efsvoltools/voltoolshttp/*.go # gosub
   - code.cloudfoundry.org/goshims/filepath/*.go # gosub
   - code.cloudfoundry.org/goshims/os/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
