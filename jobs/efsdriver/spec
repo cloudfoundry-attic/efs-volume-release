@@ -14,6 +14,9 @@ properties:
   efsdriver.listen_addr:
     description: "address efsdriver listens on"
     default: "127.0.0.1:7089"
+  efsdriver.efs_vol_tools_addr:
+    description: "host:port to serve efs volume tools functions (for drivers colocated with the efs broker)"
+    default: ""
   efsdriver.debug_addr:
     description: "address efsdriver will serve debug info"
     default: "127.0.0.1:7189"
