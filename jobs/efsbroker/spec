@@ -19,15 +19,6 @@ properties:
   efsbroker.service-id:
     description: "Id of the service to be registered with cf"
     default: "efs-service-guid"
-  efsbroker.plan-name:
-    description: "Name of the service plan to be registered with cf"
-    default: "free"
-  efsbroker.plan-id:
-    description: "Id of the service plan to be registered with cf"
-    default: "free-plan-guid"
-  efsbroker.plan-desc:
-    description: "Description of the service plan to be registered with cf"
-    default: "free local filesystem"
   efsbroker.data-dir:
     description: "Directory on broker VM to persist instance and binding state"
     default: "/var/vcap/store/efsbroker"
