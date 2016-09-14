@@ -19,9 +19,9 @@ fi
 MANIFEST_NAME=efsvolume-aws-manifest
 
 spiff merge ${templates}/efsvolume-manifest-aws.yml \
+$1 \
 $2 \
-$3 \
-$7 \
+$6 \
 ${templates}/toplevel-manifest-overrides.yml \
 > $PWD/$MANIFEST_NAME.yml
 
