@@ -16,12 +16,12 @@ files:
   - code.cloudfoundry.org/efsdriver/efsvoltools/*.go # gosub
   - code.cloudfoundry.org/efsdriver/efsvoltools/voltoolshttp/*.go # gosub
   - code.cloudfoundry.org/goshims/filepath/*.go # gosub
+  - code.cloudfoundry.org/goshims/http_wrap/*.go # gosub
   - code.cloudfoundry.org/goshims/os/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
   - code.cloudfoundry.org/voldriver/*.go # gosub
   - code.cloudfoundry.org/voldriver/driverhttp/*.go # gosub
   - github.com/bmizerany/pat/*.go # gosub
-  - github.com/cloudfoundry/gunk/http_wrap/*.go # gosub
   - github.com/tedsuo/ifrit/*.go # gosub
   - github.com/tedsuo/ifrit/grouper/*.go # gosub
   - github.com/tedsuo/ifrit/http_server/*.go # gosub

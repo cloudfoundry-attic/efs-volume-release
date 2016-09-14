@@ -16,6 +16,7 @@ files:
   - code.cloudfoundry.org/efsbroker/utils/*.go # gosub
   - code.cloudfoundry.org/efsdriver/efsvoltools/*.go # gosub
   - code.cloudfoundry.org/efsdriver/efsvoltools/voltoolshttp/*.go # gosub
+  - code.cloudfoundry.org/goshims/http_wrap/*.go # gosub
   - code.cloudfoundry.org/goshims/ioutil/*.go # gosub
   - code.cloudfoundry.org/goshims/os/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
@@ -48,7 +49,6 @@ files:
   - github.com/aws/aws-sdk-go/vendor/github.com/go-ini/ini/*.go # gosub
   - github.com/aws/aws-sdk-go/vendor/github.com/jmespath/go-jmespath/*.go # gosub
   - github.com/bmizerany/pat/*.go # gosub
-  - github.com/cloudfoundry/gunk/http_wrap/*.go # gosub
   - github.com/gorilla/context/*.go # gosub
   - github.com/gorilla/mux/*.go # gosub
   - github.com/pivotal-cf/brokerapi/*.go # gosub
