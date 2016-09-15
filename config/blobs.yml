@@ -1,8 +1,4 @@
 ---
-go1.6.2.linux-amd64.tar.gz:
-  object_id: 0f1221f6-e249-423b-9e77-927ddf6800e2
-  sha: b8318b09de06076d5397e6ec18ebef3b45cd315d
-  size: 84840658
 go1.7.linux-amd64.tar.gz:
   object_id: 6183a9fa-4871-4853-8e46-c579f1d2f1a9
   sha: a744e29da97fc3aadad1ee0d7d89b0d899645e50
