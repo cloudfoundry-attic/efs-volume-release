@@ -1,10 +1,6 @@
 [submodule "src/github.com/pivotal-cf/brokerapi"]
 	path = src/github.com/pivotal-cf/brokerapi
-	url = https://github.com/cwlbraa/brokerapi
-	branch = master
-[submodule "src/github.com/gorilla/context"]
-	path = src/github.com/gorilla/context
-	url = https://github.com/gorilla/context
+	url = https://github.com/lwoydziak/brokerapi
 	branch = master
 [submodule "src/github.com/gorilla/mux"]
 	path = src/github.com/gorilla/mux
@@ -73,10 +69,6 @@
 [submodule "src/code.cloudfoundry.org/efsdriver"]
 	path = src/code.cloudfoundry.org/efsdriver
 	url = https://github.com/cloudfoundry-incubator/efsdriver
-	branch = master
-[submodule "src/github.com/cloudfoundry/gunk"]
-	path = src/github.com/cloudfoundry/gunk
-	url = https://github.com/cloudfoundry/gunk
 	branch = master
 [submodule "src/github.com/tedsuo/rata"]
 	path = src/github.com/tedsuo/rata
