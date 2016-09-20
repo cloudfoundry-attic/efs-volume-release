@@ -17,6 +17,7 @@ files:
   - code.cloudfoundry.org/efsdriver/efsvoltools/voltoolshttp/*.go # gosub
   - code.cloudfoundry.org/goshims/filepath/*.go # gosub
   - code.cloudfoundry.org/goshims/http_wrap/*.go # gosub
+  - code.cloudfoundry.org/goshims/ioutil/*.go # gosub
   - code.cloudfoundry.org/goshims/os/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
   - code.cloudfoundry.org/voldriver/*.go # gosub
