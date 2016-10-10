@@ -3,4 +3,6 @@ set -e
 
 scripts_path=./$(dirname $0)
 
+export CF_USERNAME=admin
+
 fly -t persi execute -c $scripts_path/ci/run_pats_efsvolume.build.yml -i efs-volume-release=/Users/pivotal/workspace/efs-volume-release --privileged
