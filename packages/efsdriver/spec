@@ -5,6 +5,7 @@ dependencies:
 - golang-efsvolume
 
 files:
+  - golang.org/x/sys/unix/*.*
   - code.cloudfoundry.org/cfhttp/*.go # gosub
   - code.cloudfoundry.org/cfhttp/handlers/*.go # gosub
   - code.cloudfoundry.org/cfhttp/unix_transport/*.go # gosub
