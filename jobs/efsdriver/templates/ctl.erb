@@ -33,7 +33,7 @@ case $1 in
     umask 0
 
     # this driver needs CAP_SYS_ADMIN to perform mount operations and CAP_FOWNER to chmod the file and open access
-    setcap cap_sys_admin,cap_fowner=ep /var/vcap/packages/efsdriver/bin/efsdriver
+    setcap cap_sys_admin,cap_chown=ep /var/vcap/packages/efsdriver/bin/efsdriver
 
     exec chpst -u vcap:vcap /var/vcap/packages/efsdriver/bin/efsdriver \
       --listenAddr="<%= p("efsdriver.listen_addr") %>" \
