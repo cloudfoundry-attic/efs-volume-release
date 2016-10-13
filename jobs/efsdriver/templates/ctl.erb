@@ -35,9 +35,9 @@ case $1 in
     # this driver needs CAP_SYS_ADMIN to perform mount operations
     setcap cap_sys_admin=ep /var/vcap/packages/efsdriver/bin/efsdriver
 
-    user_opt = "-u vcap:vcap"
-    if [ "<%= p("efsdriver.run_as_root") %>" -eq "true" ]; then
-        user_opt = ""
+    user_opt="-u vcap:vcap"
+    if [ "<%= p("efsdriver.run_as_root") %>" == "true" ]; then
+        user_opt=""
     fi
 
     exec chpst $user_opt /var/vcap/packages/efsdriver/bin/efsdriver \
