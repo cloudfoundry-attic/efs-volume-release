@@ -26,3 +26,6 @@ properties:
   efsdriver.log_level:
     description: "efsdriver log level"
     default: "info"
+  efsdriver.run_as_root:
+    description: "efsdriver process runs as root"
+    default: "false"
