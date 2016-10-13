@@ -32,9 +32,11 @@ case $1 in
     # volume drivers need to create directories with 777 so container users can see them
     umask 0
 
-    # this driver needs CAP_SYS_ADMIN to perform mount operations
+    # this driver needs CAP_SYS_ADMIN to perform mount operations and CAP_FOWNER to chmod the file and open access
     setcap cap_sys_admin=ep /var/vcap/packages/efsdriver/bin/efsdriver
     setcap -v cap_sys_admin=ep /var/vcap/packages/efsdriver/bin/efsdriver
+    setcap cap_fowner=ep /var/vcap/packages/efsdriver/bin/efsdriver
+    setcap -vcap_fowner=ep /var/vcap/packages/efsdriver/bin/efsdriver
 
     exec chpst -u vcap:vcap /var/vcap/packages/efsdriver/bin/efsdriver \
       --listenAddr="<%= p("efsdriver.listen_addr") %>" \
