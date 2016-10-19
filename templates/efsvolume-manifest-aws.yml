@@ -72,7 +72,7 @@ properties:
     aws-security-group: (( merge ))
   efsdriver:
     efs_vol_tools_addr: 127.0.0.1:7090
-    run_as_root: true
+q
   nats: (( merge ))
 releases:
   - name: efs-volume
