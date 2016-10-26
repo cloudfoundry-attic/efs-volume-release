@@ -1,11 +1,13 @@
 # EFS volume release
 This is a bosh release that packages an [efsdriver](https://github.com/cloudfoundry-incubator/efsdriver) and an [efsbroker](https://github.com/cloudfoundry-incubator/efsbroker) for consumption by a volume_services_enabled Cloud Foundry deployment.
 
+This broker/driver pair allows you to provision new AWS Elastic File Systems and bind those volumes to your applications for shared file access in an AWS environment.
+
 # Deploying to AWS EC2
 
 ## Pre-requisites
 
-1. Install Cloud Foundry with Diego, or start from an existing CF+Diego deployment on AWS.  If you are starting from scratch, the article [Deploying CF and Diego to AWS](https://github.com/cloudfoundry/diego-release/tree/develop/examples/aws) provides detailed instructions 
+1. Install Cloud Foundry with Diego, or start from an existing CF+Diego deployment on AWS.  If you are starting from scratch, the article [Deploying CF and Diego to AWS](https://github.com/cloudfoundry/diego-release/tree/develop/examples/aws) provides detailed instructions. 
 
 2. If you don't already have it, install spiff according to its [README](https://github.com/cloudfoundry-incubator/spiff). spiff is a tool for generating BOSH manifests that is required in some of the scripts used below.
 
@@ -94,8 +96,8 @@ If you did not use diego scripts to generate your manifest, you can manually edi
 
 #### creds.yml
 * Determine the following information
-    - BOSH_USERNAME: the admin user name you use with `bosh login`
-    - BOSH_PASSWORD: the password you use with `bosh login`
+    - BROKER_USERNAME: some invented username 
+    - BROKER_PASSWORD: some invented password
     - AWS_ACCESS_KEY_ID: the access key id efsbroker will use to create new Elastic File Systems. If you do not already have an id/key pair, you can generate one from the AWS Console [Security Credentials page](https://console.aws.amazon.com/iam/home#security_credential) 
     - AWS_SECRET_ACCESS_KEY: see above
     - AWS_SUBNET_ID: the subnet you want to create new EFS volume mount points in.  For simple deployments, the subnet used by Diego cells will work.
@@ -106,8 +108,8 @@ If you did not use diego scripts to generate your manifest, you can manually edi
     ---
     properties:
       efsbroker:
-        username: <BOSH_USERNAME>
-        password: <BOSH_PASSWORD>
+        username: <BROKER_USERNAME>
+        password: <BROKER_PASSWORD>
         aws-access-key-id: <AWS_ACCESS_KEY_ID>
         aws-secret-access-key: <AWS_SECRET_ACCESS_KEY>
         aws-subnet-ids: <AWS_SUBNET_ID>
@@ -116,47 +118,51 @@ If you did not use diego scripts to generate your manifest, you can manually edi
     
 #### cf.yml
 
+* copy your cf.yml that you used during cf deployment, or download it from bosh: `bosh download manifest [your cf deployment name] > cf.yml`
 
+### Generate the Deployment Manifest
+* manually edit templates/efsvolume-manifest-aws.yml to fix hard coded subnets, ip ranges, security groups, and URIs to match your deployment.
+* manually edit templates/toplevel-manifest-overrides.yml to fix the compilation VM AZ if you are not running in the us-east data center.
+* run the following spiff merge:
+    ```
+    spiff merge templates/efsvolume-manifest-aws.yml cf.yml director-uuid.yml creds.yml templates/toplevel-manifest-overrides.yml > efs.yml
+    ```
 
+> **Note:** having templates that need to be manually edited because they contain details of our CI environment is profoundly undesirable.  We have [a story in our backlog](https://www.pivotaltracker.com/story/show/133226541) to clean this up.  In the meantime, please accept our sincerest apologies! 
 
+### Deploy EFS Broker
+* type the following: 
+    ```
+    bosh -d efs.yml deploy
+    ```
+    
+## Register efs-broker
+* type the following: 
+    ```
+    cf create-service-broker efsbroker <BROKER_USERNAME> <BROKER_PASSWORD> http://efsbroker.YOUR.DOMAIN.com
+    cf enable-service-access efs
+    ```
 
+## Create an EFS volume service
+* type the following: 
+    ```
+    cf create-service efs generalPurpose myVolume
+    cf services
+    ```
+* keep invoking `cf services` until the myVolume service shows as ready
 
-
-
-
-
-
-
-
-
-VVVVV GARBAGE VVVVV
-
-8. Execute the following script to generate all manifests and deploy:-
-
+## Deploy the pora test app, bind it to your service and start the app
+* type the following: 
     ```bash
-    cd ~/workspace/local-volume-release
-    ./scripts/deploy-bosh-lite.sh
-    ```
-
-## Register local-broker
-
-    ```
-    # optionaly delete previous broker:
-    cf delete-service-broker localbroker
+    cd src/code.cloudfoundry.org/persi-acceptance-tests/assets/pora
     
-    cf create-service-broker localbroker admin admin http://localbroker.bosh-lite.com
-    cf enable-service-access local-volume
-    ```
-
-## Deploy pora and test volume services
-
-    ```bash
-    cf create-service local-volume free-local-disk local-volume-instance
+    cf push pora --no-start
     
-    cf push pora -f ./assets/pora/manifest.yml -p ./assets/pora/ --no-start
-    
-    cf bind-service pora local-volume-instance
+    cf bind-service pora myVolume
     
     cf start pora
     ```
 
+## test the app to make sure that it can access your EFS volume
+* to check if the app is running, `curl http://pora.YOUR.DOMAIN.com` should return the instance index for your app
+* to check if the app can access the shared volume `curl http://pora.YOUR.DOMAIN.com/write` writes a file to the share and then reads it back out again.
