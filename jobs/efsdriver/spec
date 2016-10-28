@@ -23,6 +23,9 @@ properties:
   efsdriver.driver_path:
     description: "path to place driver spec/json file for volman to discover"
     default: "/var/vcap/data/voldrivers"
+  efsdriver.cell_mount_path:
+    description: "path to mount volumes into on the cell"
+    default: "/var/vcap/data/volumes/efs"
   efsdriver.log_level:
     description: "efsdriver log level"
     default: "info"
