@@ -11,16 +11,17 @@ files:
   - code.cloudfoundry.org/cflager/*.go # gosub
   - code.cloudfoundry.org/clock/*.go # gosub
   - code.cloudfoundry.org/debugserver/*.go # gosub
-  - code.cloudfoundry.org/efsdriver/*.go # gosub
   - code.cloudfoundry.org/efsdriver/cmd/efsdriver/*.go # gosub
   - code.cloudfoundry.org/efsdriver/efsvoltools/*.go # gosub
   - code.cloudfoundry.org/efsdriver/efsvoltools/voltoolshttp/*.go # gosub
+  - code.cloudfoundry.org/efsdriver/efsvoltools/voltoolslocal/*.go # gosub
   - code.cloudfoundry.org/goshims/execshim/*.go # gosub
   - code.cloudfoundry.org/goshims/filepathshim/*.go # gosub
   - code.cloudfoundry.org/goshims/http_wrap/*.go # gosub
   - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
   - code.cloudfoundry.org/goshims/osshim/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
+  - code.cloudfoundry.org/nfsdriver/*.go # gosub
   - code.cloudfoundry.org/voldriver/*.go # gosub
   - code.cloudfoundry.org/voldriver/driverhttp/*.go # gosub
   - github.com/bmizerany/pat/*.go # gosub

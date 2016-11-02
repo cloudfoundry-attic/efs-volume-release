@@ -86,3 +86,7 @@
 	path = src/golang.org/x/sys/
 	url = https://go.googlesource.com/sys
 	branch = master
+[submodule "src/code.cloudfoundry.org/nfsdriver"]
+	path = src/code.cloudfoundry.org/nfsdriver
+	url = https://github.com/cloudfoundry-incubator/nfsdriver
+	branch = master
