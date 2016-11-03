@@ -4,7 +4,7 @@
 set -e -x
 
 usage () {
-    echo "Usage: generate_manifest.sh cf-manifest director-stub bosh-target bosh-username bosh-password efs-props-stub"
+    echo "Usage: generate_manifest.sh cf-manifest director-stub efs-props-stub iaas-stub"
     echo " * default"
     exit 1
 }
@@ -21,7 +21,8 @@ MANIFEST_NAME=efsvolume-aws-manifest
 spiff merge ${templates}/efsvolume-manifest-aws.yml \
 $1 \
 $2 \
-$6 \
+$3 \
+$4 \
 ${templates}/toplevel-manifest-overrides.yml \
 > $PWD/$MANIFEST_NAME.yml
 

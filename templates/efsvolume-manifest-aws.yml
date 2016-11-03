@@ -1,6 +1,7 @@
 ---
 name: efs-volume
 director_uuid:  (( merge ))
+
 compilation:
   workers: 1
   network: efsvolume-subnet
@@ -11,6 +12,7 @@ compilation:
     ephemeral_disk:
       size: 10000 # in MB
       type: gp2
+
 jobs:
 - name: efsbroker
   instances: 1
@@ -19,7 +21,8 @@ jobs:
   - name: efsvolume-subnet
     default: [dns, gateway]
   - name: public
-    static_ips: [52.87.35.4]
+    static_ips:
+    - <<: (( merge ))
   resource_pool: medium
   templates:
   - release: efs-volume
@@ -43,23 +46,11 @@ jobs:
 
 networks:
 - name: efsvolume-subnet
-  subnets:
-  - cloud_properties:
-      security_groups:
-      - sg-a2945ad9
-      subnet: subnet-8c2365d4
-    dns:
-    - 10.10.0.2
-    gateway: 10.10.200.1
-    range: 10.10.200.0/24
-    reserved:
-    - 10.10.200.2 - 10.10.200.9
-    - 10.10.200.106 - 10.10.200.115
-    static:
-    - 10.10.200.10 - 10.10.200.105
+  subnets: (( merge ))
   type: manual
 - name: public
   type: vip
+
 properties:
   efsbroker:
     plan-desc: efs filesystem for aws
@@ -73,29 +64,24 @@ properties:
   efsdriver:
     efs_vol_tools_addr: 127.0.0.1:7090
   nats: (( merge ))
+
 releases:
   - name: efs-volume
     version: latest
   - name: cf
     version: latest
+
 resource_pools:
   - name: large
     network: efsvolume-subnet
-    stemcell:
-      name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
-      version: latest
-    cloud_properties:
-      instance_type: m3.large
-      availability_zone: us-east-1c
+    stemcell: (( merge ))
+    cloud_properties: (( merge ))
 
   - name: medium
     network: efsvolume-subnet
-    stemcell:
-      name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
-      version: latest
-    cloud_properties:
-      instance_type: m3.medium
-      availability_zone: us-east-1c
+    stemcell: (( merge ))
+    cloud_properties: (( merge ))
+
 update:
   canaries: 1
   max_in_flight: 3

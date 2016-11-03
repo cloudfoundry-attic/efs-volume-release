@@ -50,10 +50,8 @@ EOF
   ./templates/generate_manifest.sh \
     ../generated-manifest-efs/cf-deployment.yml \
     ${efsvolume_stubs}/director-uuid.yml \
-    ${BOSH_TARGET} \
-    ${BOSH_USERNAME} \
-    ${BOSH_PASSWORD} \
     ${PWD}/efsbroker-creds.yml
+    templates/stubs/iaas-settings.yml
 
   mv efsvolume-aws-manifest.yml ../generated-manifest-efs/efsvolume-manifest.yml
 popd
