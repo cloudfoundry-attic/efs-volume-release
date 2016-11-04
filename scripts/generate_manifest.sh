@@ -9,7 +9,7 @@ usage () {
     exit 1
 }
 
-home="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+home="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. q&& pwd )"
 templates=${home}/templates
 
 if [[  "$1" == "bosh-lite" || "$1" == "aws" || -z $1 ]]
