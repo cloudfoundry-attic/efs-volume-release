@@ -50,8 +50,8 @@ EOF
   ./scripts/generate_manifest.sh \
     ../generated-manifest-efs/cf-deployment.yml \
     ${efsvolume_stubs}/director-uuid.yml \
-    ${PWD}/efsbroker-creds.yml \
-    templates/stubs/iaas-settings.yml
+    ${efsvolume_stubs}/iaas.yml \
+    ${PWD}/efsbroker-creds.yml
 
   mv efsvolume-aws-manifest.yml ../generated-manifest-efs/efsvolume-manifest.yml
 popd
