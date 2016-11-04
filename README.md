@@ -116,6 +116,51 @@ If you did not use diego scripts to generate your manifest, you can manually edi
         aws-security-group: <AWS_SECURITY_GROUP>
     ```
     
+#### iaas.yml
+
+* Create a stub for your iaas settings using the following template:-
+    ```
+    ---
+    jobs:
+    - name: efsbroker
+      networks:
+      - name: public
+        static_ips: [52.87.35.4]
+    
+    networks:
+    - name: efsvolume-subnet
+      subnets:
+      - cloud_properties:
+          security_groups:
+          - <--- SECURITY GROUP YOU WANT YOUR EFSBROKER TO BE IN --->
+          subnet: <--- SUBNET YOU WANT YOUR EFSBROKER TO BE IN --->
+        dns:
+        - 10.10.0.2
+        gateway: 10.10.200.1
+        range: 10.10.200.0/24
+        reserved:
+        - 10.10.200.2 - 10.10.200.9
+        - 10.10.200.106 - 10.10.200.115
+        static:
+        - 10.10.200.10 - 10.10.200.105
+    
+    resource_pools:
+      - name: medium
+        stemcell:
+          name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
+          version: latest
+        cloud_properties:
+          instance_type: m3.medium
+          availability_zone: us-east-1c
+      - name: large
+        stemcell:
+          name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
+          version: latest
+        cloud_properties:
+          instance_type: m3.large
+          availability_zone: us-east-1c
+    ```
+
 #### cf.yml
 
 * copy your cf.yml that you used during cf deployment, or download it from bosh: `bosh download manifest [your cf deployment name] > cf.yml`
@@ -125,10 +170,8 @@ If you did not use diego scripts to generate your manifest, you can manually edi
 * manually edit templates/toplevel-manifest-overrides.yml to fix the compilation VM AZ if you are not running in the us-east data center.
 * run the following spiff merge:
     ```
-    spiff merge templates/efsvolume-manifest-aws.yml cf.yml director-uuid.yml creds.yml templates/toplevel-manifest-overrides.yml > efs.yml
+    spiff merge templates/efsvolume-manifest-aws.yml cf.yml director-uuid.yml creds.yml iaas.yml templates/toplevel-manifest-overrides.yml > efs.yml
     ```
-
-> **Note:** having templates that need to be manually edited because they contain details of our CI environment is profoundly undesirable.  We have [a story in our backlog](https://www.pivotaltracker.com/story/show/133226541) to clean this up.  In the meantime, please accept our sincerest apologies! 
 
 ### Deploy EFS Broker
 * type the following: 
