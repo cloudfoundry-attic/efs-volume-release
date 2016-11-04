@@ -4,12 +4,12 @@
 set -e -x
 
 usage () {
-    echo "Usage: generate_manifest.sh cf-manifest director-stub efs-props-stub iaas-stub"
+    echo "Usage: generate_manifest.sh cf-manifest director-stub iaas-stub efs-props-stub"
     echo " * default"
     exit 1
 }
 
-templates=$(dirname $0)
+templates=$(dirname $0)../templates
 
 if [[  "$1" == "bosh-lite" || "$1" == "aws" || -z $1 ]]
   then

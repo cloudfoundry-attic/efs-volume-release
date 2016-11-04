@@ -47,7 +47,7 @@ properties:
     aws-security-group: ${AWS_SECURITY_GROUP}
 EOF
 
-  ./templates/generate_manifest.sh \
+  ./scripts/generate_manifest.sh \
     ../generated-manifest-efs/cf-deployment.yml \
     ${efsvolume_stubs}/director-uuid.yml \
     ${PWD}/efsbroker-creds.yml \
