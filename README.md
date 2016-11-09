@@ -32,9 +32,9 @@ This broker/driver pair allows you to provision new AWS Elastic File Systems and
 
 In your CF manifest, check the setting for `properties: cc: volume_services_enabled`.  If it is not already `true`, set it to `true` and redeploy CF.  (This will be quick, as it only requires BOSH to restart the cloud controller job with the new property.) 
 
-## Modify the Diego Manifest to Include the efsdriver job on the Diego Cell
-
-### Using Scripts
+## Colocate the efsdriver job on the Diego Cell
+If you have a bosh director version < `259` you will need to use one of the OLD WAYS below. (check `bosh status` to determine your version).  Otherwise we recommend the NEW WAY :thumbsup::thumbsup::thumbsup:
+### OLD WAY #1 Using Scripts to generate the Diego Manifest 
 If you originally created your Diego manifest from the scripts in diego-release, then you can use the same scripts to recreate the manifest with efs driver included. 
 
 1. In your diego-release folder, locate the file `manifest-generation/bosh-lite-stubs/experimental/voldriver/drivers.yml` and copy it into your local directory.  Edit it to look like this:
@@ -53,7 +53,7 @@ If you originally created your Diego manifest from the scripts in diego-release,
 
 3. Redeploy Diego.  Again, this will be a fast operation as it only needs to start the new efsdriver job on each Diego cell.
 
-### Manual Editing
+### OLD WAY #2 Manual Editing
 If you did not use diego scripts to generate your manifest, you can manually edit your diego manifest to include the driver. 
 
 1. Add `efs-volume` to the `releases:` key
@@ -81,6 +81,38 @@ If you did not use diego scripts to generate your manifest, you can manually edi
 3. If you are using multiple AZz, repeeat step 2 for `cell_z2`, `cell_z3`, etc.
 
 4. Redeploy Diego using your new manifest.
+
+### NEW WAY Use bosh add-ons with filtering
+This technique allows you to colocate bosh jobs on cells without editing the Diego bosh manifest.
+
+1. Create a new `runtime-config.yml` with the following content:
+   
+```yaml
+---
+releases:
+- name: efs-volume
+  version: <YOUR VERSION HERE>
+addons:
+- name: voldrivers
+  include:
+    deployments: 
+    - <YOUR DIEGO DEPLOYMENT NAME>
+    jobs: 
+    - name: rep
+      release: diego
+  jobs:
+  - name: efsdriver
+    release: efs-volume
+    properties: {}
+```
+
+2. Set the runtime config, and redeploy diego
+
+```bash
+bosh update runtime-config runtime-config.yml
+bosh download manifest <YOUR DIEGO DEPLOYMENT NAME> diego.yml
+bosh -d diego.yml deploy
+```
 
 ## Deploying efsbroker
 
