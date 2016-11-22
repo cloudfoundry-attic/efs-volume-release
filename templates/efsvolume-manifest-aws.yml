@@ -42,7 +42,7 @@ jobs:
         tags:
           component: efs-broker
         uris:
-        - efsbroker.persi.cf-app.com
+        - efs-broker.persi.cf-app.com
 
 networks:
 - name: efsvolume-subnet
