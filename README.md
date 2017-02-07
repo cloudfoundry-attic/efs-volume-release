@@ -237,7 +237,13 @@ bosh -d diego.yml deploy
     
     cf start pora
     ```
+> ####Bind Parameters####
+> * **mount:** By default, volumes are mounted into the application container in an arbitrarily named folder under /var/vcap/data.  If you prefer to mount your directory to some specific path where your application expects it, you can control the container mount path by specifying the `mount` option.  The resulting bind command would look something like 
+> ``` cf bind-service pora myVolume -c '{"mount":"/my/path"}'```
 
 ## test the app to make sure that it can access your EFS volume
 * to check if the app is running, `curl http://pora.YOUR.DOMAIN.com` should return the instance index for your app
 * to check if the app can access the shared volume `curl http://pora.YOUR.DOMAIN.com/write` writes a file to the share and then reads it back out again.
+
+## Troubleshooting
+If you have trouble getting this release to operate properly, try consulting the [Volume Services Troubleshooting Page](https://github.com/cloudfoundry-incubator/volman/blob/master/TROUBLESHOOTING.md)
