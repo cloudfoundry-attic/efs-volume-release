@@ -52,15 +52,15 @@
 	branch = master
 [submodule "src/code.cloudfoundry.org/persi-acceptance-tests"]
 	path = src/code.cloudfoundry.org/persi-acceptance-tests
-	url = https://github.com/cloudfoundry-incubator/persi-acceptance-tests
+	url = https://github.com/cloudfoundry/persi-acceptance-tests
 	branch = master
 [submodule "src/code.cloudfoundry.org/goshims"]
 	path = src/code.cloudfoundry.org/goshims
-	url = https://github.com/cloudfoundry-incubator/goshims
+	url = https://github.com/cloudfoundry/goshims
 	branch = master
 [submodule "src/code.cloudfoundry.org/voldriver"]
 	path = src/code.cloudfoundry.org/voldriver
-	url = https://github.com/cloudfoundry-incubator/voldriver
+	url = https://github.com/cloudfoundry/voldriver
 	branch = master
 [submodule "src/code.cloudfoundry.org/cfhttp"]
 	path = src/code.cloudfoundry.org/cfhttp
