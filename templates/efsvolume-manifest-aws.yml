@@ -23,7 +23,7 @@ jobs:
   - name: public
     static_ips:
     - <<: (( merge ))
-  resource_pool: medium
+  resource_pool: small
   templates:
   - release: efs-volume
     name: efsbroker
@@ -43,36 +43,6 @@ jobs:
           component: efs-broker
         uris:
         - efs-broker.persi.cf-app.com
-- name: efsbroker2
-  instances: 1
-  log_level: debug
-  networks:
-  - name: efsvolume-subnet
-    default: [dns, gateway]
-  resource_pool: medium
-  templates:
-  - release: efs-volume
-    name: efsbroker
-  - release: efs-volume
-    name: efsdriver
-  - release: cf
-    name: route_registrar
-  persistent_disk: 25000
-  properties:
-    efsbroker:
-      listen-addr: 0.0.0.0:8669
-      service-name: efs2
-      service-id: efs2
-      data-dir: /var/vcap/store/efsbroker2
-    route_registrar:
-      routes:
-      - name: efs-broker2
-        port: 8669
-        registration_interval: 20s
-        tags:
-          component: efs-broker2
-        uris:
-        - efs-broker2.persi.cf-app.com
 
 networks:
 - name: efsvolume-subnet
@@ -112,6 +82,10 @@ resource_pools:
     stemcell: (( merge ))
     cloud_properties: (( merge ))
 
+  - name: small
+    network: efsvolume-subnet
+    stemcell: (( merge ))
+    cloud_properties: (( merge ))
 update:
   canaries: 1
   max_in_flight: 3
