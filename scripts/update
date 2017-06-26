@@ -16,19 +16,9 @@ set -x -e
 
 scripts_dir="$(cd $(dirname $0) && pwd)"
 
-if uname -a | grep Darwin; then
-    if brew list | grep git-secrets; then
-        echo "git secrets already installed"
-    else
-        brew install git-secrets
-    fi
-    git secrets --register-aws --global || true
-fi
-
 if [ -d "$(dirname "$scripts_dir")/.git" ] ; then
   "$scripts_dir"/install-git-hooks
 fi
-
 
 has_upstream && git pull -r
 
