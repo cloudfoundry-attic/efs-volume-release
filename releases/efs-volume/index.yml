@@ -1,0 +1,5 @@
+---
+builds:
+  854c0b14-d3af-4e69-9602-3f6c0bc52baa:
+    version: 0.1.0-beta.1
+format-version: '2'
