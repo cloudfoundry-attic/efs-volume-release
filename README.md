@@ -25,7 +25,7 @@ This broker/driver pair allows you to provision new AWS Elastic File Systems and
 
 1. Bosh Create and Upload the release
     ```
-    bosh -n create release --force && bosh -n upload release
+    bosh -n create-release --force && bosh -n upload-release
     ```
 
 ## Enable Volume Services in CF and Redeploy
@@ -33,7 +33,7 @@ This broker/driver pair allows you to provision new AWS Elastic File Systems and
 In your CF manifest, check the setting for `properties: cc: volume_services_enabled`.  If it is not already `true`, set it to `true` and redeploy CF.  (This will be quick, as it only requires BOSH to restart the cloud controller job with the new property.) 
 
 ## Colocate the efsdriver job on the Diego Cell
-If you have a bosh director version < `259` you will need to use one of the OLD WAYS below. (check `bosh status` to determine your version).  Otherwise we recommend the NEW WAY :thumbsup::thumbsup::thumbsup:
+If you have a bosh director version < `259` you will need to use one of the OLD WAYS below. (check `bosh environment` to determine your version).  Otherwise we recommend the NEW WAY :thumbsup::thumbsup::thumbsup:
 ### OLD WAY #1 Using Scripts to generate the Diego Manifest 
 If you originally created your Diego manifest from the scripts in diego-release, then you can use the same scripts to recreate the manifest with efs driver included. 
 
@@ -109,9 +109,9 @@ addons:
 1. Set the runtime config, and redeploy diego
 
 ```bash
-bosh update runtime-config runtime-config.yml
-bosh download manifest <YOUR DIEGO DEPLOYMENT NAME> diego.yml
-bosh -d diego.yml deploy
+bosh update-runtime-config runtime-config.yml
+bosh -d <YOUR DIEGO DEPLOYMENT NAME> manifest > diego.yml
+bosh -d <YOUR DIEGO DEPLOYMENT NAME> deploy diego.yml
 ```
 
 ## Deploying efsbroker
@@ -119,7 +119,7 @@ bosh -d diego.yml deploy
 ### Create Stub Files
 
 #### director.yml 
-* determine your bosh director uuid by invoking bosh status --uuid
+* determine your bosh director uuid by invoking `bosh environment`
 * create a new director.yml file and place the following contents into it:
     ```
     ---
@@ -210,7 +210,7 @@ bosh -d diego.yml deploy
 
 #### cf.yml
 
-* copy your cf.yml that you used during cf deployment, or download it from bosh: `bosh download manifest [your cf deployment name] > cf.yml`
+* copy your cf.yml that you used during cf deployment, or download it from bosh: `bosh -d <YOUR CF DEPLOYMENT NAME> manifest > cf.yml`
 
 ### Generate the Deployment Manifest
 * manually edit templates/efsvolume-manifest-aws.yml to fix hard coded subnets, ip ranges, security groups, and URIs to match your deployment.
@@ -223,7 +223,7 @@ bosh -d diego.yml deploy
 ### Deploy EFS Broker
 * type the following: 
     ```
-    bosh -d efs.yml deploy
+    bosh -d <YOUR BROKER DEPLOYMENT NAME> deploy efs.yml
     ```
     
 ## Register efs-broker
