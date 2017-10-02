@@ -130,7 +130,7 @@ bosh -d <YOUR DIEGO DEPLOYMENT NAME> deploy diego.yml
 * Determine the following information
     - BROKER_USERNAME: some invented username 
     - BROKER_PASSWORD: some invented password
-    - AWS_ACCESS_KEY_ID (optional): the access key id efsbroker will use to create new Elastic File Systems. If you do not already have an id/key pair, you can generate one from the AWS Console [Security Credentials page](https://console.aws.amazon.com/iam/home#security_credential) 
+    - AWS_ACCESS_KEY_ID (optional): the access key id efsbroker will use to create new Elastic File Systems. If you do not already have an id/key pair, you can generate one from the AWS Console [Security Credentials page](https://console.aws.amazon.com/iam/home#security_credential). For an example IAM policy, see `policy.json`.
     - AWS_SECRET_ACCESS_KEY (optional): see above
     - AWS_SUBNET_ID: the subnet you want to create new EFS volume mount points in.  For simple deployments, the subnet used by Diego cells will work.
     - AWS_SECURITY_GROUP: the security group you want to use for new mount points.  Again, for simple deployments you can reference the security group used by diego cells.
