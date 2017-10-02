@@ -30,8 +30,8 @@ case $1 in
     echo $$ > $PIDFILE
 
     export AWS_REGION='<%= p("efsbroker.aws-region") %>'
-    export AWS_ACCESS_KEY_ID='<%= p("efsbroker.aws-access-key-id") %>'
-    export AWS_SECRET_ACCESS_KEY='<%= p("efsbroker.aws-secret-access-key") %>'
+    <% if_p("efsbroker.aws-access-key-id") do |access_key| %>export AWS_ACCESS_KEY_ID='<%= access_key %>'<% end %>
+    <% if_p("efsbroker.aws-secret-access-key") do |secret_key| %>export AWS_SECRET_ACCESS_KEY='<%= secret_key %>'<% end %>
 
     exec chpst -u vcap:vcap /var/vcap/packages/efsbroker/bin/efsbroker \
       --listenAddr="<%= p("efsbroker.listen-addr") %>" \

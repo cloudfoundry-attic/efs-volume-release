@@ -9,7 +9,7 @@ This broker/driver pair allows you to provision new AWS Elastic File Systems and
 
 1. Install Cloud Foundry with Diego, or start from an existing CF+Diego deployment on AWS.  If you are starting from scratch, the article [Deploying CF and Diego to AWS](https://github.com/cloudfoundry/diego-release/tree/develop/examples/aws) provides detailed instructions. 
 
-2. If you don't already have it, install spiff according to its [README](https://github.com/cloudfoundry-incubator/spiff). spiff is a tool for generating BOSH manifests that is required in some of the scripts used below.
+1. If you don't already have it, install spiff according to its [README](https://github.com/cloudfoundry-incubator/spiff). spiff is a tool for generating BOSH manifests that is required in some of the scripts used below.
 
 ## Create and Upload this Release
 
@@ -23,9 +23,9 @@ This broker/driver pair allows you to provision new AWS Elastic File Systems and
     ./scripts/update
     ```
 
-2. Bosh Create and Upload the release
+1. Bosh Create and Upload the release
     ```
-    bosh -n create release --force && bosh -n upload release
+    bosh -n create-release --force && bosh -n upload-release
     ```
 
 ## Enable Volume Services in CF and Redeploy
@@ -33,7 +33,7 @@ This broker/driver pair allows you to provision new AWS Elastic File Systems and
 In your CF manifest, check the setting for `properties: cc: volume_services_enabled`.  If it is not already `true`, set it to `true` and redeploy CF.  (This will be quick, as it only requires BOSH to restart the cloud controller job with the new property.) 
 
 ## Colocate the efsdriver job on the Diego Cell
-If you have a bosh director version < `259` you will need to use one of the OLD WAYS below. (check `bosh status` to determine your version).  Otherwise we recommend the NEW WAY :thumbsup::thumbsup::thumbsup:
+If you have a bosh director version < `259` you will need to use one of the OLD WAYS below. (check `bosh environment` to determine your version).  Otherwise we recommend the NEW WAY :thumbsup::thumbsup::thumbsup:
 ### OLD WAY #1 Using Scripts to generate the Diego Manifest 
 If you originally created your Diego manifest from the scripts in diego-release, then you can use the same scripts to recreate the manifest with efs driver included. 
 
@@ -49,9 +49,9 @@ If you originally created your Diego manifest from the scripts in diego-release,
         release: efs-volume
     ```
 
-2. Now regenerate your diego manifest using the `-d` option, as detailed in [Setup Volume Drivers for Diego](https://github.com/cloudfoundry/diego-release/blob/develop/examples/aws/OPTIONAL.md#setup-volume-drivers-for-diego)
+1. Now regenerate your diego manifest using the `-d` option, as detailed in [Setup Volume Drivers for Diego](https://github.com/cloudfoundry/diego-release/blob/develop/examples/aws/OPTIONAL.md#setup-volume-drivers-for-diego)
 
-3. Redeploy Diego.  Again, this will be a fast operation as it only needs to start the new efsdriver job on each Diego cell.
+1. Redeploy Diego.  Again, this will be a fast operation as it only needs to start the new efsdriver job on each Diego cell.
 
 ### OLD WAY #2 Manual Editing
 If you did not use diego scripts to generate your manifest, you can manually edit your diego manifest to include the driver. 
@@ -65,7 +65,7 @@ If you did not use diego scripts to generate your manifest, you can manually edi
     - name: efs-volume
       version: latest
     ```
-2. Add `efsdriver` to the `jobs: name: cell_z1 templates:` key
+1. Add `efsdriver` to the `jobs: name: cell_z1 templates:` key
     ```
     jobs:
       ... 
@@ -78,9 +78,9 @@ If you did not use diego scripts to generate your manifest, you can manually edi
         - name: efsdriver
           release: efs-volume
     ```
-3. If you are using multiple AZz, repeeat step 2 for `cell_z2`, `cell_z3`, etc.
+1. If you are using multiple AZz, repeeat step 2 for `cell_z2`, `cell_z3`, etc.
 
-4. Redeploy Diego using your new manifest.
+1. Redeploy Diego using your new manifest.
 
 ### NEW WAY Use bosh add-ons with filtering
 This technique allows you to colocate bosh jobs on cells without editing the Diego bosh manifest.
@@ -106,12 +106,12 @@ addons:
     properties: {}
 ```
 
-2. Set the runtime config, and redeploy diego
+1. Set the runtime config, and redeploy diego
 
 ```bash
-bosh update runtime-config runtime-config.yml
-bosh download manifest <YOUR DIEGO DEPLOYMENT NAME> diego.yml
-bosh -d diego.yml deploy
+bosh update-runtime-config runtime-config.yml
+bosh -d <YOUR DIEGO DEPLOYMENT NAME> manifest > diego.yml
+bosh -d <YOUR DIEGO DEPLOYMENT NAME> deploy diego.yml
 ```
 
 ## Deploying efsbroker
@@ -119,7 +119,7 @@ bosh -d diego.yml deploy
 ### Create Stub Files
 
 #### director.yml 
-* determine your bosh director uuid by invoking bosh status --uuid
+* determine your bosh director uuid by invoking `bosh environment`
 * create a new director.yml file and place the following contents into it:
     ```
     ---
@@ -130,10 +130,25 @@ bosh -d diego.yml deploy
 * Determine the following information
     - BROKER_USERNAME: some invented username 
     - BROKER_PASSWORD: some invented password
-    - AWS_ACCESS_KEY_ID: the access key id efsbroker will use to create new Elastic File Systems. If you do not already have an id/key pair, you can generate one from the AWS Console [Security Credentials page](https://console.aws.amazon.com/iam/home#security_credential) 
-    - AWS_SECRET_ACCESS_KEY: see above
+    - AWS_ACCESS_KEY_ID (optional): the access key id efsbroker will use to create new Elastic File Systems. If you do not already have an id/key pair, you can generate one from the AWS Console [Security Credentials page](https://console.aws.amazon.com/iam/home#security_credential) 
+    - AWS_SECRET_ACCESS_KEY (optional): see above
     - AWS_SUBNET_ID: the subnet you want to create new EFS volume mount points in.  For simple deployments, the subnet used by Diego cells will work.
     - AWS_SECURITY_GROUP: the security group you want to use for new mount points.  Again, for simple deployments you can reference the security group used by diego cells.
+
+    Note: instead of setting `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, you can grant the relevant permissions to the broker instance using [IAM instance profiles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html). This approach allows you to manage AWS permissions without creating and rotating IAM credentials. To use this approach, create an instance profile with the necessary permissions, create a [VM extension using BOSH cloud config](https://bosh.io/docs/cloud-config.html#vm-extensions), and associate the VM extension with the broker instance group:
+
+    ```yaml
+    vm_extensions:
+    - name: efsbroker
+      cloud_properties:
+        iam_instance_profile: efsbroker
+    ```
+
+    ```yaml
+    instance_groups:
+    - name: efsbroker
+      vm_extensions: [efsbroker]
+    ```
     
 * create a new creds.yml file and place the following contents into it:
     ```
@@ -195,7 +210,7 @@ bosh -d diego.yml deploy
 
 #### cf.yml
 
-* copy your cf.yml that you used during cf deployment, or download it from bosh: `bosh download manifest [your cf deployment name] > cf.yml`
+* copy your cf.yml that you used during cf deployment, or download it from bosh: `bosh -d <YOUR CF DEPLOYMENT NAME> manifest > cf.yml`
 
 ### Generate the Deployment Manifest
 * manually edit templates/efsvolume-manifest-aws.yml to fix hard coded subnets, ip ranges, security groups, and URIs to match your deployment.
@@ -208,7 +223,7 @@ bosh -d diego.yml deploy
 ### Deploy EFS Broker
 * type the following: 
     ```
-    bosh -d efs.yml deploy
+    bosh -d <YOUR BROKER DEPLOYMENT NAME> deploy efs.yml
     ```
     
 ## Register efs-broker
