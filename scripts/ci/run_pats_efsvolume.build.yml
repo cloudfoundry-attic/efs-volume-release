@@ -18,6 +18,7 @@ params:
   PLAN_NAME: replace-me
   BROKER_URL: replace-me
   BROKER_USER: replace-me
-  BROKER_PASSWORD: replace-me
+  BROKER_PASSWORD:
+  BROKER_PASSWORD_KEY: efs-broker-password
 run:
   path: efs-volume-release/scripts/ci/run_pats_withsetup
