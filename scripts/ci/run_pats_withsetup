@@ -28,6 +28,7 @@ check_param SERVICE_NAME
 check_param PLAN_NAME
 check_param BROKER_URL
 check_param BROKER_USER
+check_param DEFAULT_TIMEOUT
 
 if [ -z "$APPLICATION_PATH" ]; then
     echo "APPLICATION_PATH cannot be blank"
@@ -58,4 +59,5 @@ ${SERVICE_NAME} \
 ${PLAN_NAME} \
 ${BROKER_URL} \
 ${BROKER_USER} \
-${BROKER_PASSWORD}
+${BROKER_PASSWORD} \
+${DEFAULT_TIMEOUT}

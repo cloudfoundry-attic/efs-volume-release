@@ -6,7 +6,7 @@ scripts_path=./$(dirname $0)
 eval $($scripts_path/get_paths.sh)
 
 usage () {
-    echo "Usage: run-pats admin_user admin_password api_host apps_domain service_name plan_name broker_url broker_user broker_password"
+    echo "Usage: run-pats admin_user admin_password api_host apps_domain service_name plan_name broker_url broker_user broker_password default_timeout"
     exit 1
 }
 
@@ -45,7 +45,7 @@ pushd `dirname $0`
       \"broker_user\": \"${8}\",
       \"broker_password\": \"${9}\",
       \"skip_ssl_validation\": true,
-      \"default_timeout\": 30,
+      \"default_timeout\": ${default_timeout},
       \"name_prefix\": \"PATs\"
     } "  > ${CONFIG}
 
