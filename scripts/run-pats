@@ -45,7 +45,7 @@ pushd `dirname $0`
       \"broker_user\": \"${8}\",
       \"broker_password\": \"${9}\",
       \"skip_ssl_validation\": true,
-      \"default_timeout\": ${10},
+      \"default_timeout\": "${10}",
       \"name_prefix\": \"PATs\"
     } "  > ${CONFIG}
 
