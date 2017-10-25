@@ -135,7 +135,7 @@ bosh -d <YOUR DIEGO DEPLOYMENT NAME> deploy diego.yml
     - AWS_SUBNET_ID: the subnet you want to create new EFS volume mount points in.  For simple deployments, the subnet used by Diego cells will work.
     - AWS_SECURITY_GROUP: the security group you want to use for new mount points.  Again, for simple deployments you can reference the security group used by diego cells.
 
-    Note: instead of setting `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, you can grant the relevant permissions to the broker instance using [IAM instance profiles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html). This approach allows you to manage AWS permissions without creating and rotating IAM credentials. To use this approach, create an instance profile with the necessary permissions, create a [VM extension using BOSH cloud config](https://bosh.io/docs/cloud-config.html#vm-extensions), and associate the VM extension with the broker instance group:
+    Note: instead of setting `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, you can grant the relevant permissions to the broker instance using [IAM instance profiles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html). This approach allows you to manage AWS permissions without creating and rotating IAM credentials. To use this approach, create an instance profile with the necessary permissions, create a [VM extension using BOSH cloud config](https://bosh.io/docs/cloud-config.html#vm-extensions), and associate the VM extension with the instance profile and broker instance group:
 
     ```yaml
     vm_extensions:
