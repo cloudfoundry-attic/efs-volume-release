@@ -11,7 +11,7 @@
         "elasticfilesystem:CreateFileSystem",
         "elasticfilesystem:CreateMountTarget",
         "elasticfilesystem:DeleteFileSystem",
-        "elasticfilesystem:DeleteMountTargets",
+        "elasticfilesystem:DeleteMountTarget",
         "elasticfilesystem:DescribeFileSystems",
         "elasticfilesystem:DescribeMountTargets"
       ],
