@@ -32,6 +32,9 @@ case $1 in
     # volume drivers need to create directories with 777 so container users can see them
     umask 0
 
+    # fetch the AZ for this cell from EC2
+    CELL_AZ=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
+
     exec chpst /var/vcap/packages/efsdriver/bin/efsdriver \
       --listenAddr="<%= p("efsdriver.listen_addr") %>" \
       --efsVolToolsAddr="<%= p("efsdriver.efs_vol_tools_addr") %>" \
@@ -40,6 +43,7 @@ case $1 in
       --driversPath="<%= p("efsdriver.driver_path") %>" \
       --mountDir="<%= p("efsdriver.cell_mount_path") %>" \
       --logLevel="<%= p("efsdriver.log_level") %>" \
+      --availabilityZone="$CELL_AZ" \
       2> >(tee -a $LOG_DIR/efsdriver.stderr.log | logger -p user.error -t vcap.efsdriver) \
       1> >(tee -a $LOG_DIR/efsdriver.stdout.log | logger -p user.info -t vcap.efsdriver)
 
