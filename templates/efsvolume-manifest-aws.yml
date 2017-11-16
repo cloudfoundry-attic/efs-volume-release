@@ -60,7 +60,8 @@ properties:
     aws-secret-access-key: (( merge ))
     aws-access-key-id: (( merge ))
     aws-subnet-ids: (( merge ))
-    aws-security-group: (( merge ))
+    aws-security-groups: (( merge ))
+    aws-azs: (( merge ))
   efsdriver:
     efs_vol_tools_addr: 127.0.0.1:7090
   nats: (( merge ))

@@ -132,8 +132,9 @@ bosh -d <YOUR DIEGO DEPLOYMENT NAME> deploy diego.yml
     - BROKER_PASSWORD: some invented password
     - AWS_ACCESS_KEY_ID (optional): the access key id efsbroker will use to create new Elastic File Systems. If you do not already have an id/key pair, you can generate one from the AWS Console [Security Credentials page](https://console.aws.amazon.com/iam/home#security_credential). For an example IAM policy, see `policy.json`.
     - AWS_SECRET_ACCESS_KEY (optional): see above
-    - AWS_SUBNET_ID: the subnet you want to create new EFS volume mount points in.  For simple deployments, the subnet used by Diego cells will work.
-    - AWS_SECURITY_GROUP: the security group you want to use for new mount points.  Again, for simple deployments you can reference the security group used by diego cells.
+    - AWS_SUBNET_IDS: the subnets you want to create new EFS volume mount points in, comma delimited.  For simple deployments, the subnet used by Diego cells will work.
+    - AWS_SECURITY_GROUPS: the security groups you want to use for new mount points, one per subnet.  Again, for simple deployments you can reference the security group used by diego cells.
+    - AWS_AZS: the availability zones of your subnets (one per subnet, comma delimited)
 
     Note: instead of setting `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, you can grant the relevant permissions to the broker instance using [IAM instance profiles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html). This approach allows you to manage AWS permissions without creating and rotating IAM credentials. To use this approach, create an instance profile with the necessary permissions, create a [VM extension using BOSH cloud config](https://bosh.io/docs/cloud-config.html#vm-extensions) that names the instance profile, and associate the VM extension with the broker instance group, as follows:
 
@@ -159,8 +160,9 @@ bosh -d <YOUR DIEGO DEPLOYMENT NAME> deploy diego.yml
         password: <BROKER_PASSWORD>
         aws-access-key-id: <AWS_ACCESS_KEY_ID>
         aws-secret-access-key: <AWS_SECRET_ACCESS_KEY>
-        aws-subnet-ids: <AWS_SUBNET_ID>
-        aws-security-group: <AWS_SECURITY_GROUP>
+        aws-subnet-ids: <AWS_SUBNET_IDS>
+        aws-security-groups: <AWS_SECURITY_GROUPS>
+        aws-azs: <AWS_AZS>
     ```
     
 #### iaas.yml
@@ -254,7 +256,7 @@ bosh -d <YOUR DIEGO DEPLOYMENT NAME> deploy diego.yml
     ```
 > ####Bind Parameters####
 > * **mount:** By default, volumes are mounted into the application container in an arbitrarily named folder under /var/vcap/data.  If you prefer to mount your directory to some specific path where your application expects it, you can control the container mount path by specifying the `mount` option.  The resulting bind command would look something like 
-> ``` cf bind-service pora myVolume -c '{"mount":"/my/path"}'```
+> ``` cf bind-service pora myVolume -c '{"mount":"/var/my/path"}'```
 
 ## test the app to make sure that it can access your EFS volume
 * to check if the app is running, `curl http://pora.YOUR.DOMAIN.com` should return the instance index for your app
