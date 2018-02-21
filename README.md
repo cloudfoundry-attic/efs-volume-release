@@ -91,7 +91,7 @@ Values for the above variables should be set as follows:
     -o ../efs-volume-release/operations/deploy-efs-broker-and-install-driver.yml
     ```
     
-**Note:** the above command is an example, but your deployment command should match the one you used to deploy Cloud Foundry initially, with the addition of a `-o ../smb-volume-release/operations/deploy-smb-broker-and-install-driver.yml` option.
+**Note:** the above command is an example, but your deployment command should match the one you used to deploy Cloud Foundry initially, with the addition of a `-o ../efs-volume-release/operations/deploy-efs-broker-and-install-driver.yml` option.
 
 Your CF deployment will now have a running service broker and volume drivers, ready to mount nfs volumes.  Unless you have explicitly defined a variable for your nfsbroker password, BOSH will generate one for you.  
 If you let BOSH generate the efsbroker password for you, you can find the password for use in broker registration via the `bosh interpolate` command:
