@@ -96,8 +96,8 @@ Values for the above variables should be set as follows:
 
 Your CF deployment will now have a running service broker and volume drivers, ready to create and mount efs volumes.  Unless you have explicitly defined a variable for your efsbroker password, BOSH will generate one for you.  
 If you let BOSH generate the efsbroker password for you, you can find the password for use in broker registration via the bosh interpolate command:
-    ```bash
-    # BOSH CLI v2
+
+    ```
     bosh int deployment-vars.yml --path /efs-broker-password
     ```
 
