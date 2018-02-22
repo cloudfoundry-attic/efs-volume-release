@@ -103,7 +103,7 @@ If you let BOSH generate the efsbroker password for you, you can find the passwo
 ## Register efs-broker
 * type the following: 
     ```
-    cf create-service-broker efsbroker admin <BROKER_PASSWORD> http://efsbroker.YOUR.DOMAIN.com
+    cf create-service-broker efsbroker admin <BROKER_PASSWORD> http://efs-broker.YOUR.DOMAIN.com
     cf enable-service-access efs
     ```
 
