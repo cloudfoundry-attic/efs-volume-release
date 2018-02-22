@@ -7,7 +7,7 @@ This broker/driver pair allows you to provision new AWS Elastic File Systems and
 
 ## Pre-requisites
 
-1. Install Cloud Foundry, or start from an existing CF deployment.  If you are starting from scratch, the article [Deploying CF and Diego to AWS](https://docs.cloudfoundry.org/deploying/index.html) provides detailed instructions.
+1. Install Cloud Foundry, or start from an existing CF deployment.  If you are starting from scratch, the article [Overview of Deploying Cloud Foundry](https://docs.cloudfoundry.org/deploying/index.html) provides detailed instructions.
 > **NB:** you must deploy Cloud Foundry to an AWS region that supports EFS.  See [this table](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) for region support.
 
 1. Install [GO](https://golang.org/dl/):
@@ -57,6 +57,7 @@ This broker/driver pair allows you to provision new AWS Elastic File Systems and
 Create an `efs-vars.yml` file with the following format:
 
     ```
+    ---
     aws-access-key-id: AWS_ACCESS_KEY_ID
     aws-secret-access-key: AWS_SECRET_ACCESS_KEY
     aws-subnet-ids: AWS_SUBNET_IDS 
@@ -94,21 +95,23 @@ Values for the above variables should be set as follows:
 **Note:** the above command is an example, but your deployment command should match the one you used to deploy Cloud Foundry initially, with the addition of a `-o ../efs-volume-release/operations/deploy-efs-broker-and-install-driver.yml` option.
 
 Your CF deployment will now have a running service broker and volume drivers, ready to create and mount efs volumes.  Unless you have explicitly defined a variable for your efsbroker password, BOSH will generate one for you.  
-If you let BOSH generate the efsbroker password for you, you can find the password for use in broker registration via the `bosh interpolate` command:
+If you let BOSH generate the efsbroker password for you, you can find the password for use in broker registration via the bosh interpolate command:
     ```bash
     # BOSH CLI v2
     bosh int deployment-vars.yml --path /efs-broker-password
     ```
 
 ## Register efs-broker
-* type the following: 
+* type the following:
+
     ```
     cf create-service-broker efsbroker admin <BROKER_PASSWORD> http://efs-broker.YOUR.DOMAIN.com
     cf enable-service-access efs
     ```
 
 ## Create an EFS volume service
-* type the following: 
+* type the following:
+
     ```
     cf create-service efs generalPurpose myVolume
     cf services
@@ -116,19 +119,17 @@ If you let BOSH generate the efsbroker password for you, you can find the passwo
 * EFS volume creation is asynchronous.  Keep invoking `cf services` until the myVolume service shows as ready
 
 ## Deploy the pora test app, bind it to your service and start the app
-* type the following: 
+* type the following:
+
     ```bash
     cd src/code.cloudfoundry.org/persi-acceptance-tests/assets/pora
-    
     cf push pora --no-start
-    
     cf bind-service pora myVolume
-    
     cf start pora
     ```
 > ####Bind Parameters####
 > * **mount:** By default, volumes are mounted into the application container in an arbitrarily named folder under /var/vcap/data.  If you prefer to mount your directory to some specific path where your application expects it, you can control the container mount path by specifying the `mount` option.  The resulting bind command would look something like 
-> ``` cf bind-service pora myVolume -c '{"mount":"/var/my/path"}'```
+> `cf bind-service pora myVolume -c '{"mount":"/var/my/path"}'`
 
 ## test the app to make sure that it can access your EFS volume
 * to check if the app is running, `curl http://pora.YOUR.DOMAIN.com` should return the instance index for your app
