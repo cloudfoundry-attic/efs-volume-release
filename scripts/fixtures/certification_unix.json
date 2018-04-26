@@ -4,6 +4,6 @@
   "driver_name": "efsdriver",
   "create_config": {
     "Name": "foovol",
-    "Opts": {"source":"10.10.1.171:/"}
+    "Opts": {"source":"10.0.31.52:/"}
   }
 }
