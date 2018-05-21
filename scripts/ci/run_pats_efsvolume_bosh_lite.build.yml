@@ -11,13 +11,10 @@ inputs:
 params:
   CF_USERNAME: replace-me
   CF_PASSWORD:
-  CF_API_ENDPOINT: replace-me
-  APPS_DOMAIN: replace-me
   APPLICATION_PATH: replace-me
   NAME_PREFIX: efsvolume
   SERVICE_NAME: replace-me
   PLAN_NAME: replace-me
-  BROKER_URL: replace-me
   BROKER_USER: replace-me
   BROKER_PASSWORD:
   BROKER_PASSWORD_KEY: efs-broker-password

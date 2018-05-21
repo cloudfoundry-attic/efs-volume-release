@@ -20,6 +20,10 @@ function teardown_bosh_env_vars() {
 
 setup_bosh_env_vars_with_ssh
 
+export CF_API_ENDPOINT=api.${BOSH_ENVIRONMENT}.sslip.io
+export APPS_DOMAIN=${BOSH_ENVIRONMENT}.sslip.io
+export BROKER_URL=http://efs-broker.${BOSH_ENVIRONMENT}.sslip.io
+
 ${scripts_path}/ci/run_pats_with_setup
 
 teardown_bosh_env_vars
