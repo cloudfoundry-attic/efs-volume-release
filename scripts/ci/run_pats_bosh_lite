@@ -24,6 +24,6 @@ export CF_API_ENDPOINT=api.${BOSH_ENVIRONMENT}.sslip.io
 export APPS_DOMAIN=${BOSH_ENVIRONMENT}.sslip.io
 export BROKER_URL=http://efs-broker.${BOSH_ENVIRONMENT}.sslip.io
 
-${scripts_path}/ci/run_pats_with_setup
+${scripts_path}/ci/run_pats_withsetup
 
 teardown_bosh_env_vars
