@@ -6,24 +6,8 @@ set -e -x
 scripts_path=./$(dirname $0)/..
 eval $($scripts_path/get_paths.sh)
 
-function setup_bosh_env_vars_with_ssh() {
-  set +x
-  source deployments-persi/persi-ci/deployments/bosh-lite-aws/setenv.sh
-  chmod 600 deployments-persi/persi-ci/deployments/bosh-lite-aws/jumpbox.key
-  ssh -4 -D 5000 -fNC jumpbox@$BOSH_ENVIRONMENT -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i deployments-persi/persi-ci/deployments/bosh-lite-aws/jumpbox.key &
-  set -x
-}
-
-function teardown_bosh_env_vars() {
-  pkill ssh || true
-}
-
-setup_bosh_env_vars_with_ssh
-
 export CF_API_ENDPOINT=api.${BOSH_ENVIRONMENT}.sslip.io
 export APPS_DOMAIN=${BOSH_ENVIRONMENT}.sslip.io
 export BROKER_URL=http://efs-broker.${BOSH_ENVIRONMENT}.sslip.io
 
 ${scripts_path}/ci/run_pats_withsetup
-
-teardown_bosh_env_vars
