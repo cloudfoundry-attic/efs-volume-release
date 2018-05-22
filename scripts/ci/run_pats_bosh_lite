@@ -6,6 +6,8 @@ set -e -x
 scripts_path=./$(dirname $0)/..
 eval $($scripts_path/get_paths.sh)
 
+source deployments-persi/persi-ci/deployments/bosh-lite-aws/setenv.sh
+
 export CF_API_ENDPOINT=api.${BOSH_ENVIRONMENT}.sslip.io
 export APPS_DOMAIN=${BOSH_ENVIRONMENT}.sslip.io
 export BROKER_URL=http://efs-broker.${BOSH_ENVIRONMENT}.sslip.io
