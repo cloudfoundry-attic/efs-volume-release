@@ -18,6 +18,12 @@
     type: password
 
 - type: replace
+  path: /variables/-
+  value:
+    name: efs-broker-database-password
+    type: password
+
+- type: replace
   path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/volume_services_enabled?
   value: true
 
@@ -48,7 +54,14 @@
           listen-addr: 0.0.0.0:8999
           service-name: efs
           service-id: d0406c23-c33f-4f10-804b-9083a486d857
-          data-dir: /var/vcap/store/efsbroker
+#          data-dir: /var/vcap/store/efsbroker
+
+          db_driver: mysql
+          db_name: efs-broker
+          db_password: ((efs-broker-database-password))
+          db_port: 3306
+          db_username: efs-broker
+
           username: admin
           password: ((efs-broker-password))
           aws-region: us-west-2

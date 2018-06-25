@@ -38,6 +38,11 @@ case $1 in
       --serviceName="<%= p("efsbroker.service-name") %>" \
       --serviceId="<%= p("efsbroker.service-id") %>" \
       --dataDir="<%= p("efsbroker.data-dir") %>" \
+      --dbDriver="<%= p("efsbroker.db_driver") %>" \
+      --dbHostname="<%= p("efsbroker.db_hostname") %>" \
+      --dbPort="<%= p("efsbroker.db_port") %>" \
+      --dbName="<%= p("efsbroker.db_name") %>" \
+      --dbCACertPath=/var/vcap/jobs/efsbroker/db_ca.crt \
       --username="<%= p("efsbroker.username") %>" \
       --password="<%= p("efsbroker.password") %>" \
       --awsSubnetIds="<%= p("efsbroker.aws-subnet-ids") %>" \

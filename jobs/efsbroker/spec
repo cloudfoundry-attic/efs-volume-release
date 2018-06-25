@@ -3,6 +3,7 @@ name: efsbroker
 
 templates:
   ctl.erb: bin/efsbroker_ctl
+  db_ca.crt.erb: db_ca.crt
 
 packages:
 - golang-efsvolume
@@ -22,6 +23,27 @@ properties:
   efsbroker.data-dir:
     description: "Directory on broker VM to persist instance and binding state"
     default: "/var/vcap/store/efsbroker"
+  efsbroker.db_driver:
+    default: ""
+    description: "(optional) database driver name when using SQL to store broker state"
+  efsbroker.db_username:
+    default: ""
+    description: "(optional) database username when using SQL to store broker state"
+  efsbroker.db_password:
+    default: ""
+    description: "(optional) database password when using SQL to store broker state"
+  efsbroker.db_hostname:
+    default: ""
+    description: "(optional) database hostname when using SQL to store broker state"
+  efsbroker.db_port:
+    default: ""
+    description: "(optional) database port when using SQL to store broker state"
+  efsbroker.db_name:
+    default: ""
+    description: "(optional) database name when using SQL to store broker state"
+  efsbroker.db_ca_cert:
+    default: ""
+    description: "(optional) CA Cert to verify database SSL connection. If not included connection will not be encrypted"
   efsbroker.username:
     description: "Basic auth username to verify on incoming Service Broker requests"
     default: "admin"
