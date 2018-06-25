@@ -91,7 +91,9 @@
   path: /instance_groups/name=diego-cell/jobs/name=nfsv3driver?
   value:
     name: nfsv3driver
-    properties: {}
+    properties:
+      nfsv3driver:
+        allowed-in-mount: "auto_cache,version,sloppy_mount"
     release: nfs-volume
 - type: replace
   path: /instance_groups/name=diego-cell/jobs/name=mapfs?
