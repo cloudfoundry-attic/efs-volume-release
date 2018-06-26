@@ -36,6 +36,13 @@
   value: true
 
 - type: replace
+  path: /instance_groups/name=database/jobs/name=mysql/properties/cf_mysql/mysql/seeded_databases/-
+  value:
+    name: efs-broker
+    password: ((efs-broker-database-password))
+    username: efs-broker
+
+- type: replace
   path: /instance_groups/-
   value:
     name: efsbroker
