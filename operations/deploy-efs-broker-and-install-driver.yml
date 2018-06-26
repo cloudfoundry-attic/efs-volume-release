@@ -1,41 +1,33 @@
-### NOTE: this ops file depends on cf-deployment/operations/enable-nfs-volume-service.yml as we no longer deploy a
-### separate volume driver for efs.
-
-- type: replace
-  path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/volume_services_enabled?
-  value: true
-- type: replace
-  path: /instance_groups/name=cc-worker/jobs/name=cloud_controller_worker/properties/cc/volume_services_enabled?
-  value: true
-- type: replace
-  path: /instance_groups/name=scheduler/jobs/name=cloud_controller_clock/properties/cc/volume_services_enabled?
-  value: true
-
 - type: replace
   path: /releases/-
   value:
     name: efs-volume
     version: latest
+
 - type: replace
-  path: /releases/name=nfs-volume?
+  path: /instance_groups/name=diego-cell/jobs/-
   value:
-    name: nfs-volume
-    sha1: 84c39ded90aed61d38dc52d10b2ff59d3248f621
-    url: https://bosh.io/d/github.com/cloudfoundry/nfs-volume-release?v=1.4.0
-    version: 1.4.0
-- type: replace
-  path: /releases/name=mapfs?
-  value:
-    name: mapfs
-    sha1: 9dcea268d327caff76690229ac09f57a0c83cf65
-    url: https://bosh.io/d/github.com/cloudfoundry/mapfs-release?v=1.0.1
-    version: 1.0.1
+    name: efsdriver
+    release: efs-volume
+    properties: {}
 
 - type: replace
   path: /variables/-
   value:
     name: efs-broker-password
     type: password
+
+- type: replace
+  path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/volume_services_enabled?
+  value: true
+
+- type: replace
+  path: /instance_groups/name=cc-worker/jobs/name=cloud_controller_worker/properties/cc/volume_services_enabled?
+  value: true
+
+- type: replace
+  path: /instance_groups/name=scheduler/jobs/name=cloud_controller_clock/properties/cc/volume_services_enabled?
+  value: true
 
 - type: replace
   path: /instance_groups/-
@@ -87,16 +79,3 @@
               component: efs-broker
             uris:
             - efs-broker.((system_domain))
-- type: replace
-  path: /instance_groups/name=diego-cell/jobs/name=nfsv3driver?
-  value:
-    name: nfsv3driver
-    properties:
-      nfsv3driver:
-        allowed-in-mount: "auto_cache,version,az-map"
-    release: nfs-volume
-- type: replace
-  path: /instance_groups/name=diego-cell/jobs/name=mapfs?
-  value:
-    name: mapfs
-    release: mapfs
