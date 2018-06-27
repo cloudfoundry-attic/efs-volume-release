@@ -64,10 +64,12 @@
 #          data-dir: /var/vcap/store/efsbroker
 
           db_driver: mysql
-          db_name: efs-broker
-          db_password: ((efs-broker-database-password))
-          db_port: 3306
           db_username: efs-broker
+          db_password: ((efs-broker-database-password))
+          db_hostname: sql-db.service.cf.internal
+          db_port: 3306
+          db_name: efs-broker
+          release_level_backup: true
 
           username: admin
           password: ((efs-broker-password))
