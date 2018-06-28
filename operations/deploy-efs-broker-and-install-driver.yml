@@ -54,13 +54,13 @@
     networks:
       - name: default
     jobs:
-  - name: consul_agent
-    release: consul
-    consumes:
-      consul_common: {from: consul_common_link}
-      consul_server: nil
-      consul_client: {from: consul_client_link}
-  - name: efsbroker
+    - name: consul_agent
+      release: consul
+      consumes:
+        consul_common: {from: consul_common_link}
+        consul_server: nil
+        consul_client: {from: consul_client_link}
+    - name: efsbroker
       release: efs-volume
       properties:
         efsbroker:
@@ -68,7 +68,6 @@
           service-name: efs
           service-id: d0406c23-c33f-4f10-804b-9083a486d857
 #          data-dir: /var/vcap/store/efsbroker
-
           db_driver: mysql
           db_username: efs-broker
           db_password: ((efs-broker-database-password))
@@ -76,7 +75,6 @@
           db_port: 3306
           db_name: efs-broker
           release_level_backup: true
-
           username: admin
           password: ((efs-broker-password))
           aws-region: us-west-2
