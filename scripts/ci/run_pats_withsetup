@@ -29,6 +29,7 @@ check_param PLAN_NAME
 check_param BROKER_URL
 check_param BROKER_USER
 check_param DEFAULT_TIMEOUT
+check_param PARALLEL_NODES
 
 if [ -z "$APPLICATION_PATH" ]; then
     echo "APPLICATION_PATH cannot be blank"
@@ -50,7 +51,7 @@ fi
 
 go get github.com/onsi/ginkgo/ginkgo
 
-${scripts_path}/run-pats \
+PARALLEL_NODES=${PARALLEL_NODES} ${scripts_path}/run-pats \
 ${CF_USERNAME} \
 ${CF_PASSWORD} \
 ${CF_API_ENDPOINT} \
