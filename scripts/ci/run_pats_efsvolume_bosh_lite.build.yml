@@ -1,14 +1,19 @@
 ---
 platform: linux
 
-rootfs_uri: docker:///cloudfoundry/diego-pipeline
+image_resource:
+  type: docker-image
+  source:
+    repository: relintdockerhubpushbot/cf-deployment-concourse-tasks
+    tag: v5.15.0
 
 inputs:
   - name: efs-volume-release
-  - name: vars-store
+  - name: bbl-state  # - The Director's `bbl-state.json`
   - name: deployments-persi
 
 params:
+  BBL_STATE_DIR: replace-me
   CF_USERNAME: replace-me
   CF_PASSWORD:
   APPLICATION_PATH: replace-me
