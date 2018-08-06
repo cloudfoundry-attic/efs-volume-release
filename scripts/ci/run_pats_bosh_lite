@@ -6,7 +6,7 @@ set -e -x
 scripts_path=./$(dirname $0)/..
 eval $($scripts_path/get_paths.sh)
 
-bbl --state-dir director-state/${BBL_STATE_DIR} print-env > set-env.sh
+bbl --state-dir bbl-state/${BBL_STATE_DIR} print-env > set-env.sh
 source set-env.sh
 
 export CF_API_ENDPOINT=api.${BOSH_ENVIRONMENT}.sslip.io
