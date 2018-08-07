@@ -25,5 +25,6 @@ params:
   BROKER_PASSWORD_KEY: efs-broker-password
   DEFAULT_TIMEOUT: 30
   PARALLEL_NODES: 4
+  ELASTIC_IP: replace-me
 run:
   path: efs-volume-release/scripts/ci/run_pats_bosh_lite
