@@ -1,0 +1,40 @@
+name: efs-volume
+version: 0.2.0
+commit_hash: 2ef005d
+uncommitted_changes: false
+jobs:
+- name: efsbroker
+  version: 6b39e6b6c1aa5709507890be4b43e28d362de9a8
+  fingerprint: 6b39e6b6c1aa5709507890be4b43e28d362de9a8
+  sha1: 564e31390c935768c612d65da3bff067da506ff8
+- name: efsdriver
+  version: 9ea349dcbc7e97575dfb8d3670f793dda788b0a8
+  fingerprint: 9ea349dcbc7e97575dfb8d3670f793dda788b0a8
+  sha1: 6833f9c373c0150c3b4a81ba6992f163ee637dfc
+packages:
+- name: efsbroker
+  version: 8410525e92144ec6bcc4f62b409837714021721f
+  fingerprint: 8410525e92144ec6bcc4f62b409837714021721f
+  sha1: 017f7d81c62e6e8109b21bdfa2b7d785c696fbda
+  dependencies:
+  - golang-efsvolume
+- name: efsdriver
+  version: 75c0d2a650979284f0e823e6b0134cc74e671496
+  fingerprint: 75c0d2a650979284f0e823e6b0134cc74e671496
+  sha1: ba726fb9cb618169351439ae2cd0148d5fa94a97
+  dependencies:
+  - golang-efsvolume
+- name: efsvolume_pid_utils
+  version: dd98888279e5d6c769e9db5454dd079ce3d6be87
+  fingerprint: dd98888279e5d6c769e9db5454dd079ce3d6be87
+  sha1: 2c34ff771f292e1452bbf763a2c88339bb2a4179
+  dependencies: []
+- name: golang-efsvolume
+  version: ddb8956df0c67aecb6cd6366bbc0ee5b5bd73ede
+  fingerprint: ddb8956df0c67aecb6cd6366bbc0ee5b5bd73ede
+  sha1: 3b2084ad1edb17a2d24880a6d2b473392ea24f7c
+  dependencies: []
+license:
+  version: d82c410711899e0649e34c07a368ef4cc01be3ec
+  fingerprint: d82c410711899e0649e34c07a368ef4cc01be3ec
+  sha1: fd38b97b33ea61289c7ac127a12be15ebb1686a5
