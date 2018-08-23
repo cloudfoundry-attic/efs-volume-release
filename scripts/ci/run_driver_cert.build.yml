@@ -8,7 +8,8 @@ image_resource:
     tag: latest
 
 inputs:
+  - name: efs-volume-release-concourse-tasks
   - name: efs-volume-release
 
 run:
-  path: efs-volume-release/scripts/ci/run_driver_cert
+  path: efs-volume-release-concourse-tasks/scripts/ci/run_driver_cert

@@ -8,7 +8,7 @@ image_resource:
     tag: v5.15.0
 
 inputs:
-  - name: efs-volume-release
+  - name: efs-volume-release-concourse-tasks
   - name: bbl-state  # - The Director's `bbl-state.json`
   - name: deployments-persi
 
@@ -27,4 +27,4 @@ params:
   PARALLEL_NODES: 4
   ELASTIC_IP: replace-me
 run:
-  path: efs-volume-release/scripts/ci/run_pats_bosh_lite
+  path: efs-volume-release-concourse-tasks/scripts/ci/run_pats_bosh_lite
