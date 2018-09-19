@@ -38,7 +38,10 @@ case $1 in
     exec chpst /var/vcap/packages/efsdriver/bin/efsdriver \
       --listenAddr="<%= p("efsdriver.listen_addr") %>" \
       --efsVolToolsAddr="<%= p("efsdriver.efs_vol_tools_addr") %>" \
-      --transport="tcp" \
+      --transport="tcp-json" \
+      <% if p("efsdriver.enable_unique_volume_ids") %> \
+      --uniqueVolumeIds \
+      <% end %> \
       --debugAddr="<%= p("efsdriver.debug_addr") %>" \
       --driversPath="<%= p("efsdriver.driver_path") %>" \
       --mountDir="<%= p("efsdriver.cell_mount_path") %>" \

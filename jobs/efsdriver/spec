@@ -29,3 +29,6 @@ properties:
   efsdriver.log_level:
     description: "efsdriver log level"
     default: "info"
+  efsdriver.enable_unique_volume_ids:
+    description: "opt-in to unique volume IDs"
+    default: true
