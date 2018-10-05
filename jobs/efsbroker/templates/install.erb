@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e -x
+set -e
 
 install_if_missing ()
 {
@@ -25,10 +25,3 @@ if [ "$codename" == "xenial" ]; then
     install_if_missing nfs-common /var/vcap/packages/nfs-debs/nfs-common_1%3a1.2.8-9ubuntu12.1_amd64.deb
     ) 200>/var/vcap/data/dpkg.lock
 fi
-
-DATA_DIR=<%= p("efsdriver.driver_path") %>
-mkdir -p $DATA_DIR
-chown vcap:vcap $DATA_DIR
-
-echo "Installed efsdriver path"
-exit 0

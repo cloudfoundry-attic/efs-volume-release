@@ -2,6 +2,7 @@
 name: efsdriver
 
 dependencies:
+- nfs-debs
 - golang-efsvolume
 
 files:

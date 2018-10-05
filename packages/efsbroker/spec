@@ -2,6 +2,7 @@
 name: efsbroker
 
 dependencies:
+- nfs-debs
 - golang-efsvolume
 
 files:
