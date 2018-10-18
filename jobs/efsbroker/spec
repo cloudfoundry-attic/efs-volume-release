@@ -64,3 +64,9 @@ properties:
     description: "Comma separated AWS security group ids to assign to the mount points (one per subnet)"
   efsbroker.aws-azs:
     description: "Comma separated AWS AZs of the subnets (one per subnet)"
+  efsbroker.log_level:
+    description: "efsbroker log level"
+    default: "info"
+  efsbroker.log_format:
+    description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
+    default: "rfc3339"

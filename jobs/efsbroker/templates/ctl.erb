@@ -52,6 +52,8 @@ case $1 in
       --awsSubnetIds="<%= p("efsbroker.aws-subnet-ids") %>" \
       --awsSecurityGroups="<%= p("efsbroker.aws-security-groups") %>" \
       --awsAZs="<%= p("efsbroker.aws-azs") %>" \
+      --logLevel="<%= p("efsbroker.log_level") %>" \
+      --logFormat="<%= p("efsbroker.log_format") %>" \
       2> >(tee -a $LOG_DIR/efsbroker.stderr.log | logger -p user.error -t vcap.efsbroker) \
       1> >(tee -a $LOG_DIR/efsbroker.stdout.log | logger -p user.info -t vcap.efsbroker)
 
