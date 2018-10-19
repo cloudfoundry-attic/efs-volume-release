@@ -46,7 +46,7 @@ case $1 in
       --driversPath="<%= p("efsdriver.driver_path") %>" \
       --mountDir="<%= p("efsdriver.cell_mount_path") %>" \
       --logLevel="<%= p("efsdriver.log_level") %>" \
-      --logFormat="<%= p("efsdriver.log_format") %>" \
+      --timeFormat="<%= p("efsdriver.log_time_format") %>" \
       --availabilityZone="$CELL_AZ" \
       2> >(tee -a $LOG_DIR/efsdriver.stderr.log | logger -p user.error -t vcap.efsdriver) \
       1> >(tee -a $LOG_DIR/efsdriver.stdout.log | logger -p user.info -t vcap.efsdriver)

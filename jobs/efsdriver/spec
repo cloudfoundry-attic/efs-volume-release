@@ -30,7 +30,7 @@ properties:
   efsdriver.log_level:
     description: "efsdriver log level"
     default: "info"
-  efsdriver.log_format:
+  efsdriver.log_time_format:
     description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
     default: "rfc3339"
   efsdriver.enable_unique_volume_ids:
