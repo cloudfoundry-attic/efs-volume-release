@@ -5,6 +5,6 @@ set -e -x
 pushd src/code.cloudfoundry.org/efsdriver
   ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress --race "$@"
 popd
-pushd src/code.cloudfoundry.org/nfsdriver
+pushd src/code.cloudfoundry.org/volumedriver
   ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress --race "$@"
 popd
