@@ -59,12 +59,18 @@ files:
   - github.com/aws/aws-sdk-go/aws/credentials/ec2rolecreds/*.go # gosub
   - github.com/aws/aws-sdk-go/aws/credentials/endpointcreds/*.go # gosub
   - github.com/aws/aws-sdk-go/aws/credentials/stscreds/*.go # gosub
+  - github.com/aws/aws-sdk-go/aws/csm/*.go # gosub
   - github.com/aws/aws-sdk-go/aws/defaults/*.go # gosub
   - github.com/aws/aws-sdk-go/aws/ec2metadata/*.go # gosub
+  - github.com/aws/aws-sdk-go/aws/endpoints/*.go # gosub
   - github.com/aws/aws-sdk-go/aws/request/*.go # gosub
   - github.com/aws/aws-sdk-go/aws/session/*.go # gosub
   - github.com/aws/aws-sdk-go/aws/signer/v4/*.go # gosub
-  - github.com/aws/aws-sdk-go/private/endpoints/*.go # gosub
+  - github.com/aws/aws-sdk-go/internal/ini/*.go # gosub
+  - github.com/aws/aws-sdk-go/internal/sdkio/*.go # gosub
+  - github.com/aws/aws-sdk-go/internal/sdkrand/*.go # gosub
+  - github.com/aws/aws-sdk-go/internal/sdkuri/*.go # gosub
+  - github.com/aws/aws-sdk-go/internal/shareddefaults/*.go # gosub
   - github.com/aws/aws-sdk-go/private/protocol/*.go # gosub
   - github.com/aws/aws-sdk-go/private/protocol/json/jsonutil/*.go # gosub
   - github.com/aws/aws-sdk-go/private/protocol/jsonrpc/*.go # gosub
@@ -75,7 +81,6 @@ files:
   - github.com/aws/aws-sdk-go/private/protocol/xml/xmlutil/*.go # gosub
   - github.com/aws/aws-sdk-go/service/efs/*.go # gosub
   - github.com/aws/aws-sdk-go/service/sts/*.go # gosub
-  - github.com/aws/aws-sdk-go/vendor/github.com/go-ini/ini/*.go # gosub
   - github.com/aws/aws-sdk-go/vendor/github.com/jmespath/go-jmespath/*.go # gosub
   - github.com/bmizerany/pat/*.go # gosub
   - github.com/go-sql-driver/mysql/*.go # gosub
