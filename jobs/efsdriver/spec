@@ -7,7 +7,6 @@ templates:
 
 packages:
 - nfs-debs
-- golang-efsvolume
 - efsdriver
 
 properties:
