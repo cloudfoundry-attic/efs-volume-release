@@ -54,10 +54,6 @@
 	path = src/code.cloudfoundry.org/goshims
 	url = https://github.com/cloudfoundry/goshims
 	branch = master
-[submodule "src/code.cloudfoundry.org/voldriver"]
-	path = src/code.cloudfoundry.org/voldriver
-	url = https://github.com/cloudfoundry/voldriver
-	branch = master
 [submodule "src/code.cloudfoundry.org/cfhttp"]
 	path = src/code.cloudfoundry.org/cfhttp
 	url = https://github.com/cloudfoundry/cfhttp
