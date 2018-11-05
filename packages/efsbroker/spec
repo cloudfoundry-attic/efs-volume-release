@@ -34,6 +34,8 @@ files:
   - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/net/context/*.go # gosub
   - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/net/proxy/*.go # gosub
   - code.cloudfoundry.org/debugserver/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/driverhttp/*.go # gosub
   - code.cloudfoundry.org/efsbroker/cmd/efsbroker/*.go # gosub
   - code.cloudfoundry.org/efsbroker/efsbroker/*.go # gosub
   - code.cloudfoundry.org/efsbroker/utils/*.go # gosub
@@ -47,8 +49,6 @@ files:
   - code.cloudfoundry.org/lager/lagerflags/*.go # gosub
   - code.cloudfoundry.org/service-broker-store/brokerstore/*.go # gosub
   - code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims/*.go # gosub
-  - code.cloudfoundry.org/voldriver/*.go # gosub
-  - code.cloudfoundry.org/voldriver/driverhttp/*.go # gosub
   - github.com/aws/aws-sdk-go/aws/*.go # gosub
   - github.com/aws/aws-sdk-go/aws/awserr/*.go # gosub
   - github.com/aws/aws-sdk-go/aws/awsutil/*.go # gosub
