@@ -38,18 +38,6 @@
 	path = src/github.com/aws/aws-sdk-go
 	url = https://github.com/aws/aws-sdk-go
 	branch = master
-[submodule "src/github.com/cloudfoundry-incubator/cf-test-helpers"]
-	path = src/github.com/cloudfoundry-incubator/cf-test-helpers
-	url = https://github.com/cloudfoundry-incubator/cf-test-helpers
-	branch = master
-[submodule "src/github.com/nu7hatch/gouuid"]
-	path = src/github.com/nu7hatch/gouuid
-	url = https://github.com/nu7hatch/gouuid
-	branch = master
-[submodule "src/code.cloudfoundry.org/persi-acceptance-tests"]
-	path = src/code.cloudfoundry.org/persi-acceptance-tests
-	url = https://github.com/cloudfoundry/persi-acceptance-tests
-	branch = master
 [submodule "src/code.cloudfoundry.org/goshims"]
 	path = src/code.cloudfoundry.org/goshims
 	url = https://github.com/cloudfoundry/goshims
@@ -81,6 +69,7 @@
 [submodule "src/code.cloudfoundry.org/service-broker-store"]
 	path = src/code.cloudfoundry.org/service-broker-store
 	url = https://github.com/cloudfoundry/service-broker-store
+	branch = master
 [submodule "src/github.com/go-sql-driver/mysql"]
 	path = src/github.com/go-sql-driver/mysql
 	url = https://github.com/go-sql-driver/mysql
@@ -90,12 +79,11 @@
 [submodule "src/code.cloudfoundry.org/credhub-cli"]
 	path = src/code.cloudfoundry.org/credhub-cli
 	url = https://github.com/cloudfoundry-incubator/credhub-cli
-[submodule "src/github.com/zbiljic/go-filelock"]
-	path = src/github.com/zbiljic/go-filelock
-	url = https://github.com/zbiljic/go-filelock
 [submodule "src/code.cloudfoundry.org/volumedriver"]
 	path = src/code.cloudfoundry.org/volumedriver
 	url = https://github.com/cloudfoundry/volumedriver
+	branch = master
 [submodule "src/code.cloudfoundry.org/dockerdriver"]
 	path = src/code.cloudfoundry.org/dockerdriver
 	url = https://github.com/cloudfoundry/dockerdriver
+	branch = master
