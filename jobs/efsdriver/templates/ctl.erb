@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e -x
+set -e
 
 RUN_DIR=/var/vcap/sys/run/efsdriver
 LOG_DIR=/var/vcap/sys/log/efsdriver
@@ -13,7 +13,6 @@ exec 1>> /var/vcap/sys/log/monit/${SCRIPT}.log
 exec 2>> /var/vcap/sys/log/monit/${SCRIPT}.err.log
 
 case $1 in
-
   start)
     mkdir -p $RUN_DIR
     chown -R vcap:vcap $RUN_DIR
@@ -47,7 +46,6 @@ case $1 in
       --availabilityZone="$CELL_AZ" \
       2> >(tee -a $LOG_DIR/efsdriver.stderr.log | logger -p user.error -t vcap.efsdriver) \
       1> >(tee -a $LOG_DIR/efsdriver.stdout.log | logger -p user.info -t vcap.efsdriver)
-
     ;;
 
   stop)
@@ -59,7 +57,5 @@ case $1 in
 
   *)
     echo "Usage: efsdriver_ctl {start|stop}"
-
     ;;
-
 esac

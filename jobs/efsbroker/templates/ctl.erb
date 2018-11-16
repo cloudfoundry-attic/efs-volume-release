@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e -x
+set -e
 
 RUN_DIR=/var/vcap/sys/run/efsbroker
 LOG_DIR=/var/vcap/sys/log/efsbroker
@@ -13,7 +13,6 @@ exec 1>> /var/vcap/sys/log/monit/${SCRIPT}.log
 exec 2>> /var/vcap/sys/log/monit/${SCRIPT}.err.log
 
 case $1 in
-
   start)
     mkdir -p $RUN_DIR
     chown -R vcap:vcap $RUN_DIR
@@ -53,7 +52,6 @@ case $1 in
       --timeFormat="<%= p("efsbroker.log_time_format") %>" \
       2> >(tee -a $LOG_DIR/efsbroker.stderr.log | logger -p user.error -t vcap.efsbroker) \
       1> >(tee -a $LOG_DIR/efsbroker.stdout.log | logger -p user.info -t vcap.efsbroker)
-
     ;;
 
   stop)
@@ -65,7 +63,5 @@ case $1 in
 
   *)
     echo "Usage: efsbroker_ctl {start|stop}"
-
     ;;
-
 esac
