@@ -1,7 +1,3 @@
-go1.11.linux-amd64.tar.gz:
-  size: 127163815
-  object_id: b29ba53c-2099-46e3-6549-c4bd2db0fdf3
-  sha: 8ffb718cab4371df3495d8f6c0b15c7e6dc28fea
 nfs-debs/keyutils_1.5.9-8ubuntu1_amd64.deb:
   size: 47054
   object_id: 8bab7302-cdba-4f19-5d06-b13fdf629192
