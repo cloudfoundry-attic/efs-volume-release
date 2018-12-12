@@ -2,6 +2,8 @@
 
 set -e
 
+CLIENT_CERTS_DIR=<%= p('efsdriver.driver_path') %>/certs/efsdriver
+SERVER_CERTS_DIR=/var/vcap/jobs/efsdriver/config/certs
 RUN_DIR=/var/vcap/sys/run/efsdriver
 LOG_DIR=/var/vcap/sys/log/efsdriver
 PIDFILE=$RUN_DIR/efsdriver.pid
@@ -31,10 +33,24 @@ case $1 in
     # fetch the AZ for this cell from EC2
     CELL_AZ=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
 
+    ENABLE_INSECURE_SKIP_VERIFY=""
+    <% if p("efsdriver.ssl.insecure_skip_verify") %>
+    ENABLE_INSECURE_SKIP_VERIFY="--insecureSkipVerify"
+    <% end %>
+
     exec chpst /var/vcap/packages/efsdriver/bin/efsdriver \
       --listenAddr="<%= p("efsdriver.listen_addr") %>" \
       --efsVolToolsAddr="<%= p("efsdriver.efs_vol_tools_addr") %>" \
       --transport="tcp-json" \
+      <% if p("efsdriver.tls.ca_cert") != '' %>\
+      --requireSSL \
+      --certFile="${SERVER_CERTS_DIR}/server.crt" \
+      --keyFile="${SERVER_CERTS_DIR}/server.key" \
+      --caFile="${CLIENT_CERTS_DIR}/ca.crt" \
+      --clientCertFile="${CLIENT_CERTS_DIR}/client.crt" \
+      --clientKeyFile="${CLIENT_CERTS_DIR}/client.key" \
+      ${ENABLE_INSECURE_SKIP_VERIFY} \
+      <% end %>\
       <% if p("efsdriver.enable_unique_volume_ids") %> \
       --uniqueVolumeIds \
       <% end %> \

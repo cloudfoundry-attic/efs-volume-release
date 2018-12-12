@@ -13,6 +13,15 @@ install_if_missing ()
     fi
 }
 
+function copy_client_certs_to_spec_dir() {
+  local cert_dir="<%= p('efsdriver.driver_path') %>/certs/efsdriver"
+
+  mkdir -p ${cert_dir}
+  cp -p /var/vcap/jobs/efsdriver/config/certs/ca.crt ${cert_dir}
+  cp -p /var/vcap/jobs/efsdriver/config/certs/client.crt ${cert_dir}
+  cp -p /var/vcap/jobs/efsdriver/config/certs/client.key ${cert_dir}
+}
+
 codename=$(lsb_release -c | grep xenial | awk '{print $2}')
 if [ "$codename" == "xenial" ]; then
     echo "Installing NFS packages"
@@ -31,4 +40,8 @@ mkdir -p $DATA_DIR
 chown vcap:vcap $DATA_DIR
 
 echo "Installed efsdriver path"
+
+echo "Copying client certs to data directory..."
+copy_client_certs_to_spec_dir
+
 exit 0
