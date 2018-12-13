@@ -9,7 +9,14 @@
   value:
     name: efsdriver
     release: efs-volume
-    properties: {}
+    properties:
+      efsdriver:
+        tls:
+          ca_cert: ((efs_ca.certificate))
+          server_cert: ((efsdriver_cert.certificate))
+          server_key: ((efsdriver_cert.private_key))
+          client_cert: ((efsdriver_client_cert.certificate))
+          client_key: ((efsdriver_client_cert.private_key))
 
 - type: replace
   path: /variables/-
@@ -22,6 +29,39 @@
   value:
     name: efs-broker-database-password
     type: password
+
+- type: replace
+  path: /variables/-
+  value:
+    name: efs_ca
+    options:
+      common_name: efs-ca
+      is_ca: true
+    type: certificate
+
+- type: replace
+  path: /variables/-
+  value:
+    name: efsdriver_cert
+    options:
+      ca: efs_ca
+      common_name: 127.0.0.1
+      alternative_names:
+      - 127.0.0.1
+      extended_key_usage:
+      - server_auth
+    type: certificate
+
+- type: replace
+  path: /variables/-
+  value:
+    name: efsdriver_client_cert
+    options:
+      ca: efs_ca
+      common_name: efs-client
+      extended_key_usage:
+      - client_auth
+    type: certificate
 
 - type: replace
   path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/volume_services_enabled?
