@@ -16,4 +16,16 @@ go get github.com/onsi/ginkgo/ginkgo
 # TODO this should go in the dockerfile
 apt-get -q -y install nfs-common
 
-./scripts/run-certification-tests
+cat <<EOT > fixture.json
+{
+  "volman_driver_path": "~/voldriver_plugins",
+  "driver_address": "~/voldriver_plugins/efsdriver.sock",
+  "driver_name": "efsdriver",
+  "create_config": {
+    "Name": "foovol",
+    "Opts": {"source":"10.0.0.215:/"}
+  }
+}
+EOT
+
+./scripts/run-certification-tests "${PWD}/fixture.json"

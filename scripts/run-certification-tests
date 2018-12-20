@@ -10,7 +10,7 @@ go build -o "$HOME/efsdriver" "src/code.cloudfoundry.org/efsdriver/cmd/efsdriver
 go get -t code.cloudfoundry.org/volume_driver_cert
 
 # UNIX SOCKET TESTS
-export FIXTURE_FILENAME=$PWD/scripts/fixtures/certification_unix.json
+export FIXTURE_FILENAME=$1
 /bin/bash scripts/startdriver_unix.sh
 pushd src/code.cloudfoundry.org/volume_driver_cert
     ginkgo
