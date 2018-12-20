@@ -91,7 +91,7 @@ Values for the above variables should be set as follows:
     -v efs-vars.yml \
     -o ../efs-volume-release/operations/deploy-efs-broker-and-install-driver.yml
     ```
-    
+
 **Note:** the above command is an example, but your deployment command should match the one you used to deploy Cloud Foundry initially, with the addition of a `-o ../efs-volume-release/operations/deploy-efs-broker-and-install-driver.yml` option.
 
 Your CF deployment will now have a running service broker and volume drivers, ready to create and mount efs volumes.  Unless you have explicitly defined a variable for your efsbroker password, BOSH will generate one for you.  
@@ -136,4 +136,4 @@ bosh int deployment-vars.yml --path /efs-broker-password
 * to check if the app can access the shared volume `curl http://pora.YOUR.DOMAIN.com/write` writes a file to the share and then reads it back out again.
 
 ## Troubleshooting
-If you have trouble getting this release to operate properly, try consulting the [Volume Services Troubleshooting Page](https://github.com/cloudfoundry-incubator/volman/blob/master/TROUBLESHOOTING.md)
+If you have trouble getting this release to operate properly, try consulting the [Volume Services Troubleshooting Page](https://github.com/cloudfoundry/volman/blob/master/TROUBLESHOOTING.md)
