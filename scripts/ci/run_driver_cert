@@ -23,7 +23,7 @@ cat <<EOT > fixture.json
   "driver_name": "efsdriver",
   "create_config": {
     "Name": "foovol",
-    "Opts": {"source":"10.0.0.215:/"}
+    "Opts": {"source":"10.0.17.127:/"}
   }
 }
 EOT
