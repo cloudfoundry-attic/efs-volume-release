@@ -1,7 +1,33 @@
 #!/bin/bash
 
+install_pre_commit() {
+  if [ ! -f $1 ]; then
+    echo "#!/bin/bash" > $1
+    chmod +x $1
+  fi
+
+  if grep -q 'git-hooks/pre-commit' $1; then
+    echo "pre-commit already installed."
+  else
+    echo >> $1
+    echo './git-hooks/pre-commit' >> $1
+    echo "pre-commit installed."
+  fi
+}
+
+# efs-volume-release hooks
 RELEASE=$(cd $(dirname $0)/.. && pwd)
+PRE_COMMIT=${RELEASE}/.git/hooks/pre-commit
+install_pre_commit ${PRE_COMMIT}
 
-mkdir -p ${RELEASE}/.git/hooks
+#volumedriver hooks
+HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/volumedriver/hooks
+PRE_COMMIT=${HOOKS_DIR}/pre-commit
+mkdir -p ${HOOKS_DIR}
+install_pre_commit ${PRE_COMMIT}
 
-ln -fs ${RELEASE}/git-hooks/pre-commit ${RELEASE}/.git/hooks/pre-commit
+#dockerdriver hooks
+HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/dockerdriver/hooks
+PRE_COMMIT=${HOOKS_DIR}/pre-commit
+mkdir -p ${HOOKS_DIR}
+install_pre_commit ${PRE_COMMIT}
