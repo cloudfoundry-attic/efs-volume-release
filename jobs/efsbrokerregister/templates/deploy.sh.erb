@@ -1,0 +1,33 @@
+#!/bin/bash -eu
+
+export PATH="/var/vcap/packages/cf-cli-6-linux/bin:$PATH"
+export CF_HOME=/var/vcap/data/efsbrokerregister_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)/
+export CF_DIAL_TIMEOUT=<%= p('cf.dial_timeout') %>
+
+API_ENDPOINT="https://api.<%= p('domain') %>"
+APP_URL="https://<%= p('broker_name') %>.<%= p('domain') %>"
+PASSWORD="<%= p('password') %>"
+SERVICE_BROKER_NAME="<%= p('broker_name') %>"
+USERNAME="<%= p('username') %>"
+
+function authenticate_and_target() {
+  cf logout
+  mkdir -p "${CF_HOME}"
+  cf api "${API_ENDPOINT}" <% if p('skip_cert_verify') %>--skip-ssl-validation<% end %>
+  cf auth "<%= p('cf.client_id') %>" "<%= p('cf.client_secret') %>" --client-credentials
+}
+
+function register_service() {
+  cf create-service-broker "${SERVICE_BROKER_NAME}" "${USERNAME}" "${PASSWORD}" "${APP_URL}" || cf update-service-broker "${SERVICE_BROKER_NAME}" "${USERNAME}" "${PASSWORD}" "${APP_URL}"
+}
+
+function clean_up() {
+  cf logout
+  rm -rf "${CF_HOME}"
+}
+
+cf -v
+
+authenticate_and_target
+register_service
+clean_up

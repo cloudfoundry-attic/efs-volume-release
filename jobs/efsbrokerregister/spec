@@ -1,0 +1,30 @@
+---
+name: efsbrokerregister
+
+templates:
+  deploy.sh.erb: bin/run
+
+packages: []
+
+consumes: []
+
+properties:
+  broker_name:
+    default: efsbroker
+    description: 'Name of the service broker registered in CF'
+  cf.client_id:
+    description: 'ID of the CF client'
+  cf.client_secret:
+    description: 'Secret of the CF client'
+  cf.dial_timeout:
+    description: 'CF CLI connection dial timeout'
+    default: 5
+  domain:
+    description: 'Cloud Foundry system domain'
+  password:
+    description: 'Service broker password'
+  skip_cert_verify:
+    description: 'true if the cf api uses test certs that should not be verified'
+    default: false
+  username:
+    description: 'Service broker username'
