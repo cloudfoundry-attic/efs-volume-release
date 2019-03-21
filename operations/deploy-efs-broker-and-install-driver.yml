@@ -111,7 +111,7 @@
           release_level_backup: true
           username: admin
           password: ((efs-broker-password))
-          aws-region: us-west-2
+          aws-region: ((aws-region))
           aws-access-key-id: ((aws-access-key-id))
           aws-secret-access-key: ((aws-secret-access-key))
           aws-subnet-ids: ((aws-subnet-ids))
