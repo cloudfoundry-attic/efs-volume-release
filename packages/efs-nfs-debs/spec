@@ -1,0 +1,5 @@
+---
+name: efs-nfs-debs
+
+files:
+- nfs-debs/**/*

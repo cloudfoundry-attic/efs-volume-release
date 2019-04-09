@@ -2,7 +2,7 @@
 name: efsdriver
 
 dependencies:
-- nfs-debs
+- efs-nfs-debs
 - golang-1-linux
 
 files:

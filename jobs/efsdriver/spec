@@ -11,7 +11,7 @@ templates:
   server.key.erb: config/certs/server.key
 
 packages:
-- nfs-debs
+- efs-nfs-debs
 - efsdriver
 
 properties:
