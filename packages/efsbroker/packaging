@@ -6,6 +6,7 @@ export GOPATH=$BOSH_INSTALL_TARGET
 
 export GOROOT=$(readlink -nf /var/vcap/packages/golang-1-linux)
 export PATH=$GOROOT/bin:$PATH
+export GOCACHE=/tmp/
 go install code.cloudfoundry.org/efsbroker/cmd/efsbroker
 
 # clean up source artifacts
