@@ -7,12 +7,12 @@ cd ..
 
 go build -o "$HOME/efsdriver" "src/code.cloudfoundry.org/efsdriver/cmd/efsdriver/main.go"
 
-go get -t code.cloudfoundry.org/volume_driver_cert
+go get -t code.cloudfoundry.org/run_driver_integration_tests
 
 # UNIX SOCKET TESTS
 export FIXTURE_FILENAME=$1
 /bin/bash scripts/startdriver_unix.sh
-pushd src/code.cloudfoundry.org/volume_driver_cert
+pushd src/code.cloudfoundry.org/run_driver_integration_tests
     ginkgo
 popd
 /bin/bash scripts/stopdriver.sh

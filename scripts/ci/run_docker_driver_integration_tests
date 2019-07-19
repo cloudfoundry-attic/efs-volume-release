@@ -13,7 +13,6 @@ export PATH=$PWD/bin:$PATH
 
 go get github.com/onsi/ginkgo/ginkgo
 
-# TODO this should go in the dockerfile
 apt-get -q -y install nfs-common
 
 cat <<EOT > fixture.json
@@ -28,4 +27,4 @@ cat <<EOT > fixture.json
 }
 EOT
 
-./scripts/run-certification-tests "${PWD}/fixture.json"
+./scripts/run-integration-tests "${PWD}/fixture.json"

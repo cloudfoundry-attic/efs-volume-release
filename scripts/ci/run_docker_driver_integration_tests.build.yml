@@ -12,4 +12,4 @@ inputs:
   - name: efs-volume-release
 
 run:
-  path: efs-volume-release-concourse-tasks/scripts/ci/run_driver_cert
+  path: efs-volume-release-concourse-tasks/scripts/ci/run_docker_driver_integration_tests
