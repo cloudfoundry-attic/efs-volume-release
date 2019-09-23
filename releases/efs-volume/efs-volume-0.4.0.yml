@@ -1,0 +1,46 @@
+name: efs-volume
+version: 0.4.0
+commit_hash: 0e689e9
+uncommitted_changes: false
+jobs:
+- name: efsbroker
+  version: 0aac5270eab544b2f6ae3cf710721c4045bfe68d
+  fingerprint: 0aac5270eab544b2f6ae3cf710721c4045bfe68d
+  sha1: 8507f962e8924df508ead5c32cd400a79d3d7212
+- name: efsbrokerregister
+  version: 72d9500729c07ade142ea5c5306b2dea8671921c
+  fingerprint: 72d9500729c07ade142ea5c5306b2dea8671921c
+  sha1: d3b2049b6e43c5528e23ccbc4f1b9ba02f427783
+- name: efsdriver
+  version: d1a2155fde82ada1384436e5eb485aa0af25d60c
+  fingerprint: d1a2155fde82ada1384436e5eb485aa0af25d60c
+  sha1: 522f4018f8f8b146b823458db683e1f70b9433f1
+packages:
+- name: efs-nfs-debs
+  version: 9f4c632db4ad756b32987cdbcf3bbbb6de803adb
+  fingerprint: 9f4c632db4ad756b32987cdbcf3bbbb6de803adb
+  sha1: 5e025b02daf8eafc5287ec56a786fb930d6262eb
+  dependencies: []
+- name: efsbroker
+  version: 4265aaa2804f12d8e2946de80d0174c7851a1112
+  fingerprint: 4265aaa2804f12d8e2946de80d0174c7851a1112
+  sha1: da2516d260bd5c7e08d2976c35b233c3df9bfdfb
+  dependencies:
+  - efs-nfs-debs
+  - golang-1-linux
+- name: efsdriver
+  version: d4d10e69ae394e8973ee5f90c1edd025aedf01ac
+  fingerprint: d4d10e69ae394e8973ee5f90c1edd025aedf01ac
+  sha1: 233b543b1f4bc830b5be28b6627c656cf5bd271f
+  dependencies:
+  - efs-nfs-debs
+  - golang-1-linux
+- name: golang-1-linux
+  version: 67335315cb5afd81462d3b2f35ee79b09c69a909634d16a0ec45d7982a9a611e
+  fingerprint: 67335315cb5afd81462d3b2f35ee79b09c69a909634d16a0ec45d7982a9a611e
+  sha1: sha256:30f7672b2c30c975c16e2d7e2ed5feadb373c2be064e11068839c5d28b5fe8f9
+  dependencies: []
+license:
+  version: d82c410711899e0649e34c07a368ef4cc01be3ec
+  fingerprint: d82c410711899e0649e34c07a368ef4cc01be3ec
+  sha1: fd38b97b33ea61289c7ac127a12be15ebb1686a5
